@@ -1,0 +1,28 @@
+﻿  Moc'ing compiladores.h...
+  Uic'ing compiladores.ui...
+  Rcc'ing compiladores.qrc...
+RCC : warning : No resources in 'C:\Users\blueMonkey\documents\visual studio 2015\Projects\Compiladores\Compiladores\compiladores.qrc'.
+  
+  CErrorHandler.cpp
+  CLAritmeticOperators.cpp
+  CLAssign.cpp
+  CLCloseDimensionOperator.cpp
+  CLComments.cpp
+  CLConstantAlfanumeric.cpp
+  CLDelimiters.cpp
+  CLexicalAnalysis.cpp
+  CLGroupOperators.cpp
+  CLId.cpp
+  CLLogicOperators.cpp
+  CLNone.cpp
+  CLNumberFloat.cpp
+  CLNumberInt.cpp
+  CLOpenDimensionOperator.cpp
+  CLRelacionalOperators.cpp
+  compiladores.cpp
+  CTokenizer.cpp
+  moc_compiladores.cpp
+  main.cpp
+  Generating Code...
+  qrc_compiladores.cpp
+  Compiladores.vcxproj -> C:\Users\blueMonkey\documents\visual studio 2015\Projects\Compiladores\x64\Release\Compiladores.exe

@@ -1,0 +1,10 @@
+var	Keyword
+lucas	Id
+,	Delimiter
+sad	Id
+,	Delimiter
+sdad	Id
+:	Delimiter
+int	Keyword
+;	Delimiter
+12.012	float
