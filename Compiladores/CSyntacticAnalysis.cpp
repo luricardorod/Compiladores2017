@@ -3,8 +3,10 @@
 #include "CSProcess.h"
 #include "CSFunction.h"
 #include "CSProgram.h"
+#include "CSBlock.h"
 #include "CSMain.h"
-
+#include "CSExpression.h"
+#include "CSTerm.h"
 
 void CSyntacticAnalysis::Compile(CTokenizer * tokenaizer, CErrorHandler* errorHandler, CNodesVars* nodes)
 {
@@ -30,9 +32,12 @@ CSyntacticAnalysis::CSyntacticAnalysis()
 	m_States.resize(SYNTACTIC_STATES::SSTATES_MAX);
 	m_States[SYNTACTIC_STATES::SPROGRAM] = new CSProgram;
 	m_States[SYNTACTIC_STATES::SVAR] = new CSVar;
-	m_States[SYNTACTIC_STATES::SPROCESS] = new CSProgram;
+	m_States[SYNTACTIC_STATES::SPROCESS] = new CSProcess;
 	m_States[SYNTACTIC_STATES::SFUNCTION] = new CSFunction;
 	m_States[SYNTACTIC_STATES::SMAIN] = new CSMain;
+	m_States[SYNTACTIC_STATES::SBlock] = new CSBlock;
+	m_States[SYNTACTIC_STATES::SEXPRESSION] = new CSExpression;
+	m_States[SYNTACTIC_STATES::STERM] = new CSTerm;
 	m_indexToken = -1;
 }
 

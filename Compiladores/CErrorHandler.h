@@ -22,6 +22,12 @@ const std::string ERROR18 = "funcion o preocedimiento repetido";
 const std::string ERROR19 = "se esperaba (";
 const std::string ERROR20 = "se esperaba id o )";
 const std::string ERROR21 = "se esperaba {";
+const std::string ERROR22 = "se esperaba var o un statement";
+const std::string ERROR23 = "se esperaba , o )";
+const std::string ERROR24 = "se esperaba un operador";
+const std::string ERROR25 = "se esperaba  )";
+const std::string ERROR26 = "se esperaba  termino";
+const std::string ERROR27 = "se esperaba  }";
 
 
 

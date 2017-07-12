@@ -51,7 +51,7 @@ void CNodesVars::addGlobalNode(GlobalNode globalNode, int line) {
 void CNodesVars::addLocalNode(LocalNode localNode, int line) {
 	std::vector<GlobalNode>::iterator node;
 
-	for (auto node = Nodes.begin(); node != Nodes.end(); node++)
+	for (node = Nodes.begin(); node != Nodes.end(); node++)
 	{
 		if (node->m_name == localNode.m_name)
 		{
@@ -99,14 +99,14 @@ void CNodesVars::addLocalNode(LocalNode localNode, int line) {
 			LocalNode* temp = node->m_nextLocal;
 			if (temp->m_parent == localNode.m_parent)
 			{
-				m_errorHandler->AddError(ERROR16, "sintactico");
+				m_errorHandler->AddError(ERROR16, "sintactico", line);
 				return;
 			}
 			while (temp->m_next != NULL)
 			{
 				if (temp->m_parent == localNode.m_parent)
 				{
-					m_errorHandler->AddError(ERROR16, "sintactico");
+					m_errorHandler->AddError(ERROR16, "sintactico", line);
 					return;
 				}
 				temp = temp->m_next;

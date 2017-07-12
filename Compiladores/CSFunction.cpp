@@ -22,7 +22,7 @@ SYNTACTIC_STATES::E CSFunction::Evaluate(Token token, SYNTACTIC_STATES::E oldSta
 	token = NextToken();
 	if (token.svalue == "(")
 	{
-		int i = GroupParams();
+		int i = GroupParams(tempGlobal.m_name);
 		if (i != 0)
 		{
 			if (i==4)
@@ -48,24 +48,29 @@ SYNTACTIC_STATES::E CSFunction::Evaluate(Token token, SYNTACTIC_STATES::E oldSta
 			}
 			return SYNTACTIC_STATES::E();
 		}
-
 		token = NextToken();
-		if (token.svalue != "{")
-		{
-			m_errorHandler->AddError(ERROR21, "sintactico", token.line);
+		if (token.svalue != ":") {
+			m_errorHandler->AddError(ERROR9, "Sintactico", token.line);
 			while (token.svalue != "}" && token.svalue != "NULL")
 			{
 				token = NextToken();
 			}
-			return SYNTACTIC_STATES::E();
+			return SYNTACTIC_STATES::SPROGRAM;
 		}
-
-		m_nodes->addGlobalNode(tempGlobal, token.line);
-		////////////block
-		while (token.svalue != "}" && token.svalue != "NULL")
+		std::string type = ProcessType(token.line);
+		tempGlobal.m_type = type;
+		if (type == "error")
 		{
-			token = NextToken();
+			while (token.svalue != "}" && token.svalue != "NULL")
+			{
+				token = NextToken();
+			}
+			return SYNTACTIC_STATES::SPROGRAM;
 		}
+		m_nodes->addGlobalNode(tempGlobal, token.line);
+		(*m_States)[SYNTACTIC_STATES::SBlock]->Evaluate(token, SYNTACTIC_STATES::SFUNCTION, tempGlobal.m_name);
+		////////////block
+		
 	}
 	else
 	{

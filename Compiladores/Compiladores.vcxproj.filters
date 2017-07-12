@@ -122,6 +122,15 @@
     <ClCompile Include="NodesVars.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CSBlock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CSExpression.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CSTerm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="compiladores.h">
@@ -214,6 +223,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NodesVars.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CSBlock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CSExpression.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CSTerm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

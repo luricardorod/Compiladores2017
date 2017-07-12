@@ -24,7 +24,7 @@ SYNTACTIC_STATES::E CSVar::Evaluate(Token token, SYNTACTIC_STATES::E oldState, s
 		{
 			std::string name = token.svalue;
 			token = NextToken();
-			int dim = 0;
+			int dim = 1;
 
 			if (token.svalue == "[")
 			{
@@ -78,7 +78,7 @@ SYNTACTIC_STATES::E CSVar::Evaluate(Token token, SYNTACTIC_STATES::E oldState, s
 		}
 		return SYNTACTIC_STATES::SPROGRAM;
 	}
-	std::string type = ProcessType();
+	std::string type = ProcessType(token.line);
 	token = NextToken();
 	if (token.svalue != ";") {
 		m_errorHandler->AddError(ERROR10, "Sintactico", token.line);

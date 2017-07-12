@@ -13,6 +13,9 @@ namespace SYNTACTIC_STATES
 		SPROCESS,
 		SFUNCTION,
 		SMAIN,
+		SBlock,
+		SEXPRESSION,
+		STERM,
 		SSTATES_MAX
 	};
 }
@@ -60,7 +63,7 @@ public:
 		return dimension;
 	}
 
-	std::string ProcessType() {
+	std::string ProcessType(int line) {
 		Token temp = NextToken();
 
 		if (temp.svalue == "int" ||
@@ -70,7 +73,7 @@ public:
 		{
 			return temp.svalue;
 		}
-		m_errorHandler->AddError(ERROR11, "Sintactico");
+		m_errorHandler->AddError(ERROR11, "Sintactico", line);
 		return "error";
 	}
 
@@ -82,7 +85,7 @@ public:
 			temp.svalue == "string" ||
 			temp.svalue == "bool";
 	}
-	int GroupParams() {
+	int GroupIds() {
 		Token token = NextToken();
 
 		while (token.itype == LEXIC_STATES::lID)
@@ -92,13 +95,48 @@ public:
 			{
 				token = NextToken();
 			}
+		}
+		if (token.svalue != ")")
+		{
+			return 1;
+		}
+		return 0;
+	}
+	int GroupParams(std::string parent) {
+		Token token = NextToken();
+		
+		std::vector<LocalNode> localnodes;
+		while (token.itype == LEXIC_STATES::lID)
+		{
+			LocalNode tempLocalNode;
+			tempLocalNode.m_name = token.svalue;
+			tempLocalNode.m_category = "var";
+			tempLocalNode.m_parent = parent;
+			tempLocalNode.m_dimension = 1;
+			token = NextToken();
+			if (token.svalue == ",")
+			{
+				token = NextToken();
+				localnodes.push_back(tempLocalNode);
+			}
 			else if (token.svalue == ":")
 			{
 				if (!IsAType())
 				{
 					return 2;
 				}
+				localnodes.push_back(tempLocalNode);
+				(*m_indexToken)--;
+				std::string type = ProcessType(token.line);
+
+				for (auto i = localnodes.begin(); i != localnodes.end(); i++)
+				{
+					i->m_type = type;
+					m_nodes->addLocalNode(*i, token.line);
+				}
+
 				token = NextToken();
+
 				if (token.svalue == ";")
 				{
 					token = NextToken();
@@ -118,6 +156,10 @@ public:
 			return 4;
 		}
 		return 0;
+	}
+	bool isOperator() {
+		Token token = NextToken();
+		return token.itype == LEXIC_STATES::lARITMETICOPERATORS || token.itype == LEXIC_STATES::lLOGICOPERATORS || token.itype == LEXIC_STATES::lRELACIONALOPERATORS;
 	}
 };
 
