@@ -57,7 +57,7 @@ std::string CLLogicOperators::Exit()
 {
 	if (!m_bflagChangeState && m_bflagNegate)
 	{
-		m_tokenaizer->AddToken("!", "Logic Operator");
+		m_tokenaizer->AddToken("!", "Logic Operator", LEXIC_STATES::lLOGICOPERATORS);
 	}
 	else if (m_bflagNegate)
 	{
@@ -70,11 +70,11 @@ std::string CLLogicOperators::Exit()
 	}
 	if (m_bflagOr)
 	{
-		m_tokenaizer->AddToken("||", "Logic Operator");
+		m_tokenaizer->AddToken("||", "Logic Operator", LEXIC_STATES::lLOGICOPERATORS);
 	}
 	else
 	{
-		m_tokenaizer->AddToken("&&", "Logic Operator");
+		m_tokenaizer->AddToken("&&", "Logic Operator", LEXIC_STATES::lLOGICOPERATORS);
 	}
 	return std::string();
 }

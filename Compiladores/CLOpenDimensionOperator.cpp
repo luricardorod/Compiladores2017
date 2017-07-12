@@ -9,7 +9,7 @@ LEXIC_STATES::E CLOpenDimensionOperator::Evaluate(char character)
 
 LEXIC_STATES::E CLOpenDimensionOperator::Enter(char character, std::string string)
 {
-	m_tokenaizer->AddToken("[", "Open Dimension Operator");
+	m_tokenaizer->AddToken("[", "Open Dimension Operator", LEXIC_STATES::lOPENDIMENSIONOPERATOR);
 	return LEXIC_STATES::lNONE;
 }
 

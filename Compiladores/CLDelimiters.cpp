@@ -11,7 +11,7 @@ LEXIC_STATES::E CLDelimiters::Enter(char character, std::string string)
 {
 	m_string = "";
 	m_string.push_back(character);
-	m_tokenaizer->AddToken(m_string, "Delimiter");
+	m_tokenaizer->AddToken(m_string, "Delimiter", LEXIC_STATES::lDELIMITERS);
 	return LEXIC_STATES::lNONE;
 }
 

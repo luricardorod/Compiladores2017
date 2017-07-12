@@ -22,12 +22,12 @@ LEXIC_STATES::E CLRelacionalOperators::Enter(char character, std::string string)
 	//<, >, <= , >= , == , !=
 	if (string == "!")
 	{
-		m_tokenaizer->AddToken("!=", "Relacional Operator");
+		m_tokenaizer->AddToken("!=", "Relacional Operator", LEXIC_STATES::lRELACIONALOPERATORS);
 		return LEXIC_STATES::lNONE;
 	}
 	if (string == "=")
 	{
-		m_tokenaizer->AddToken("==", "Relacional Operator");
+		m_tokenaizer->AddToken("==", "Relacional Operator", LEXIC_STATES::lRELACIONALOPERATORS);
 		return LEXIC_STATES::lNONE;
 	}
 	m_string = "";
@@ -38,7 +38,7 @@ LEXIC_STATES::E CLRelacionalOperators::Enter(char character, std::string string)
 
 std::string CLRelacionalOperators::Exit()
 {
-	m_tokenaizer->AddToken(m_string, "Relacional Operator");
+	m_tokenaizer->AddToken(m_string, "Relacional Operator", LEXIC_STATES::lRELACIONALOPERATORS);
 
 	return std::string();
 }

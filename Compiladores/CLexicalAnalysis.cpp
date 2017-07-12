@@ -14,10 +14,18 @@
 #include "CLOpenDimensionOperator.h"
 #include "CLCloseDimensionOperator.h"
 
-void CLexicalAnalysis::Compile(std::string * file)
+void CLexicalAnalysis::Compile(std::string * file, CTokenizer* tokenaizer, CErrorHandler* errorHandler)
 {
-	m_errorHandler.Initialize();
-	m_tokenaizer.Initialize();
+	m_tokenaizer = tokenaizer;
+	m_errorHandler = errorHandler;
+	m_errorHandler->Initialize();
+	m_tokenaizer->Initialize();
+	for (auto state = m_States.begin(); state != m_States.end(); state++)
+	{
+		(*state)->m_tokenaizer = m_tokenaizer;
+		(*state)->m_errorHandler = m_errorHandler;
+	}
+
 	for (int i = 0; i < file->length(); i++)
 	{
 		LEXIC_STATES::E previousState = m_iActiveState;
@@ -35,11 +43,11 @@ void CLexicalAnalysis::Compile(std::string * file)
 	m_iActiveState = m_States[m_iActiveState]->Evaluate(' ');
 	if (m_iActiveState == LEXIC_STATES::lCOMMENTS)
 	{
-		m_errorHandler.AddError(ERROR2, "lexico");
+		m_errorHandler->AddError(ERROR2, "lexico");
 	}
 	if (m_iActiveState == LEXIC_STATES::lCONSTANTALFANUMERIC)
 	{
-		m_errorHandler.AddError(ERROR3, "lexico");
+		m_errorHandler->AddError(ERROR3, "lexico");
 	}
 
 }
@@ -47,7 +55,7 @@ CLexicalAnalysis::CLexicalAnalysis()
 {
 	m_iActiveState = LEXIC_STATES::lNONE;
 	//decalracion deestados
-	m_States.resize(LEXIC_STATES::lSTATES_MAX);
+	m_States.resize(LEXIC_STATES::lSTATES_MAX-1);
 	m_States[LEXIC_STATES::lNONE] = new CLNone;
 	m_States[LEXIC_STATES::lID] = new CLId;
 	m_States[LEXIC_STATES::lNUMBERINT] = new CLNumberInt;
@@ -64,11 +72,6 @@ CLexicalAnalysis::CLexicalAnalysis()
 	m_States[LEXIC_STATES::lCLOSEDIMENSIONOPERATOR] = new CLCloseDimensionOperator;
 
 
-	for (auto state = m_States.begin(); state != m_States.end(); state++)
-	{
-		(*state)->m_tokenaizer = &m_tokenaizer;
-		(*state)->m_errorHandler = &m_errorHandler;
-	}
 }
 
 

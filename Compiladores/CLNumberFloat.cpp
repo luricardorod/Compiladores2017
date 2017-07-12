@@ -37,7 +37,7 @@ std::string CLNumberFloat::Exit()
 	}
 	else
 	{
-		m_tokenaizer->AddToken(m_string, "float");
+		m_tokenaizer->AddToken(m_string, "float", LEXIC_STATES::lNUMBERFLOAT);
 	}
 	return std::string();
 }

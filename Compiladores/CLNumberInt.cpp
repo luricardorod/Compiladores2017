@@ -45,7 +45,7 @@ std::string CLNumberInt::Exit()
 	{
 		return m_string;
 	}
-	m_tokenaizer->AddToken(m_string, "Int");
+	m_tokenaizer->AddToken(m_string, "Int", LEXIC_STATES::lNUMBERINT);
 	return std::string();
 }
 

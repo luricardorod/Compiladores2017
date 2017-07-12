@@ -154,6 +154,12 @@
     <ClCompile Include="CLOpenDimensionOperator.cpp" />
     <ClCompile Include="CLRelacionalOperators.cpp" />
     <ClCompile Include="compiladores.cpp" />
+    <ClCompile Include="CSFunction.cpp" />
+    <ClCompile Include="CSMain.cpp" />
+    <ClCompile Include="CSProcess.cpp" />
+    <ClCompile Include="CSProgram.cpp" />
+    <ClCompile Include="CSVar.cpp" />
+    <ClCompile Include="CSyntacticAnalysis.cpp" />
     <ClCompile Include="CTokenizer.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_compiladores.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -174,6 +180,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="NodesVars.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="compiladores.h">
@@ -233,8 +240,16 @@
     <ClInclude Include="CLNumberInt.h" />
     <ClInclude Include="CLOpenDimensionOperator.h" />
     <ClInclude Include="CLRelacionalOperators.h" />
+    <ClInclude Include="CSFunction.h" />
+    <ClInclude Include="CSMain.h" />
+    <ClInclude Include="CSProcess.h" />
+    <ClInclude Include="CSProgram.h" />
+    <ClInclude Include="CSVar.h" />
+    <ClInclude Include="CSyntacticAnalysis.h" />
+    <ClInclude Include="CSyntacticStates.h" />
     <ClInclude Include="CTokenizer.h" />
     <ClInclude Include="GeneratedFiles\ui_compiladores.h" />
+    <ClInclude Include="NodesVars.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="compiladores.qrc">

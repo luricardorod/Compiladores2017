@@ -6,6 +6,12 @@ void CErrorHandler::AddError(std::string error, std::string phase)
 	m_Errors += error + "\t" + phase + "\t" + std::to_string(line) + "\n";
 }
 
+void CErrorHandler::AddError(std::string error, std::string phase, int line)
+{
+	m_numberErrors++;
+	m_Errors += error + "\t" + phase + "\t" + std::to_string(line) + "\n";
+}
+
 int CErrorHandler::GetNumberError()
 {
 	return m_numberErrors;
@@ -18,7 +24,7 @@ void CErrorHandler::Nextline()
 
 void CErrorHandler::Initialize()
 {
-	line = 0;
+	line = 1;
 	m_Errors = "";
 	m_numberErrors = 0;
 }

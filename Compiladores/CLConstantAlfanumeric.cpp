@@ -38,7 +38,7 @@ std::string CLConstantAlfanumeric::Exit()
 {
 	if (m_bflagChangeState && !m_flagError)
 	{
-		m_tokenaizer->AddToken(m_string, "Constant Alfanumeric");
+		m_tokenaizer->AddToken(m_string, "Constant Alfanumeric", LEXIC_STATES::lCONSTANTALFANUMERIC);
 	}
 	return std::string();
 }

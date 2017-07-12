@@ -8,7 +8,10 @@ LEXIC_STATES::E CLComments::Evaluate(char character)
 	{
 		return LEXIC_STATES::lNONE;
 	}
-
+	if (character == 10)
+	{
+		m_errorHandler->Nextline();
+	}
 	if (character == '*')
 	{
 		m_bflagClose = true;

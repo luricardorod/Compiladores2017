@@ -24,7 +24,7 @@ std::string CLAssign::Exit()
 	{
 		return "=";
 	}
-	m_tokenaizer->AddToken("=", "Assign");
+	m_tokenaizer->AddToken("=", "Assign", LEXIC_STATES::lASSIGN);
 
 	return std::string();
 }

@@ -9,7 +9,7 @@ LEXIC_STATES::E CLCloseDimensionOperator::Evaluate(char character)
 
 LEXIC_STATES::E CLCloseDimensionOperator::Enter(char character, std::string string)
 {
-	m_tokenaizer->AddToken("]", "Close Dimension Operator");
+	m_tokenaizer->AddToken("]", "Close Dimension Operator", LEXIC_STATES::lCLOSEDIMENSIONOPERATOR);
 	return LEXIC_STATES::lNONE;
 }
 

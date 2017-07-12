@@ -101,6 +101,27 @@
     <ClCompile Include="CLAritmeticOperators.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CSyntacticAnalysis.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CSVar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CSProgram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CSProcess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CSFunction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CSMain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NodesVars.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="compiladores.h">
@@ -169,6 +190,30 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CLAritmeticOperators.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CSyntacticAnalysis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CSyntacticStates.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CSVar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CSProgram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CSProcess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CSFunction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CSMain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NodesVars.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

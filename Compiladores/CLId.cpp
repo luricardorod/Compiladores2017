@@ -39,11 +39,11 @@ std::string CLId::Exit()
 		m_string == "default"
 	)
 	{
-		m_tokenaizer->AddToken(m_string, "Keyword");
+		m_tokenaizer->AddToken(m_string, "Keyword", LEXIC_STATES::lKEYWORD);
 	}
 	else
 	{
-		m_tokenaizer->AddToken(m_string, "Id");
+		m_tokenaizer->AddToken(m_string, "Id", LEXIC_STATES::lID);
 	}
 	return std::string();
 }

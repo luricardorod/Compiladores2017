@@ -11,7 +11,7 @@ LEXIC_STATES::E CLGroupOperators::Enter(char character, std::string string)
 {
 	m_string = "";
 	m_string.push_back(character);
-	m_tokenaizer->AddToken(m_string, "Group Operators");
+	m_tokenaizer->AddToken(m_string, "Group Operators", LEXIC_STATES::lGROUPOPERATORS);
 	return LEXIC_STATES::lNONE;
 }
 
