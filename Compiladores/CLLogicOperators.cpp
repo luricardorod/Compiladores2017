@@ -13,8 +13,9 @@ LEXIC_STATES::E CLLogicOperators::Evaluate(char character)
 		if (character == '=')
 		{
 			m_bflagChangeState = true;
+			return LEXIC_STATES::lRELACIONALOPERATORS;
 		}
-		return LEXIC_STATES::lRELACIONALOPERATORS;
+		return LEXIC_STATES::lNONE;
 	}
 	else if (m_bflagOr)
 	{
@@ -58,6 +59,8 @@ std::string CLLogicOperators::Exit()
 	if (!m_bflagChangeState && m_bflagNegate)
 	{
 		m_tokenaizer->AddToken("!", "Logic Operator", LEXIC_STATES::lLOGICOPERATORS);
+		return std::string();
+
 	}
 	else if (m_bflagNegate)
 	{

@@ -28,6 +28,7 @@ const std::string ERROR24 = "se esperaba un operador";
 const std::string ERROR25 = "se esperaba  )";
 const std::string ERROR26 = "se esperaba  termino";
 const std::string ERROR27 = "se esperaba  }";
+const std::string ERROR28 = "se esperaba funcion/procedimiento";
 
 
 

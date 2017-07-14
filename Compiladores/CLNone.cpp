@@ -8,7 +8,7 @@ LEXIC_STATES::E CLNone::Evaluate(char character)
 		m_errorHandler->Nextline();
 		return LEXIC_STATES::lNONE;
 	}
-	else if (character == 32)
+	else if (character == 32 || character == 9)
 	{
 		return LEXIC_STATES::lNONE;
 	}

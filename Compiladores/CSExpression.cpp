@@ -8,7 +8,7 @@ SYNTACTIC_STATES::E CSExpression::Evaluate(Token token, SYNTACTIC_STATES::E oldS
 
 	if (isOperator())
 	{
-		(*m_States)[SYNTACTIC_STATES::STERM]->Evaluate(token, SYNTACTIC_STATES::SEXPRESSION);
+		(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SEXPRESSION);
 	}
 	else
 	{

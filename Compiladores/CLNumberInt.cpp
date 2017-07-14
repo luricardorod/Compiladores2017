@@ -16,7 +16,7 @@ LEXIC_STATES::E CLNumberInt::Evaluate(char character)
 		return LEXIC_STATES::lNUMBERFLOAT;
 
 	}
-	else if (!(character == 10 || character == 10 || isLogicOperators(character) || IsAritmeticOperator(character) || isRelacionalOperators(character) || character == '=' || IsDelimiter(character) || IsGroupOperators(character) || character == '[' || character == ']'))
+	else if (!(character == 10 || character == 32 || isLogicOperators(character) || IsAritmeticOperator(character) || isRelacionalOperators(character) || character == '=' || IsDelimiter(character) || IsGroupOperators(character) || character == '[' || character == ']'))
 	{
 		m_errorHandler->AddError(ERROR5, "lexico");
 		m_bflagError = true;

@@ -10,7 +10,7 @@ LEXIC_STATES::E CLNumberFloat::Evaluate(char character)
 		m_string.push_back(character);
 		return LEXIC_STATES::lNUMBERFLOAT;
 	}
-	else if (!(character == 10 || character == 10 || isLogicOperators(character) || IsAritmeticOperator(character) || isRelacionalOperators(character) || character == '=' || IsDelimiter(character) || IsGroupOperators(character) || character == '[' || character == ']'))
+	else if (!(character == 10 || character == 32 || isLogicOperators(character) || IsAritmeticOperator(character) || isRelacionalOperators(character) || character == '=' || IsDelimiter(character) || IsGroupOperators(character) || character == '[' || character == ']'))
 	{
 		m_bflagError = true;
 	}

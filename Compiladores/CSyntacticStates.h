@@ -134,7 +134,7 @@ public:
 					i->m_type = type;
 					m_nodes->addLocalNode(*i, token.line);
 				}
-
+				localnodes.clear();
 				token = NextToken();
 
 				if (token.svalue == ";")
