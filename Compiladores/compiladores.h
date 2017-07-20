@@ -13,6 +13,7 @@ public:
 	~Compiladores();
 	std::string m_tokens;
 	std::string m_errors;
+	std::string m_nodes;
 
 private:
 	Ui::CompiladoresClass ui;

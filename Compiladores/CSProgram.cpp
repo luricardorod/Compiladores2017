@@ -2,16 +2,28 @@
 
 SYNTACTIC_STATES::E CSProgram::Evaluate(Token token, SYNTACTIC_STATES::E oldState, std::string parent)
 {
-	
-	if (token.itype == LEXIC_STATES::lKEYWORD)
+	bool phaseVar = false;
+	bool phaseFuncProc = false;
+	bool phaseMain = false;
+
+	while (token.svalue != "NULL")
 	{
-		while (token.svalue == "var")
+		if (token.svalue == "var")
 		{
+			if (phaseVar)
+			{
+				m_errorHandler->AddError(ERROR30, "sintactico", token.line);
+			}
 			(*m_States)[SYNTACTIC_STATES::SVAR]->Evaluate(token, SYNTACTIC_STATES::SPROGRAM);
 			token = NextToken();
 		}
-		while (token.svalue == "function" || token.svalue == "procedure")
+		else if (token.svalue == "function" || token.svalue == "procedure")
 		{
+			phaseVar = true;
+			if (phaseFuncProc)
+			{
+				m_errorHandler->AddError(ERROR31, "sintactico", token.line);
+			}
 			if (token.svalue == "function")
 			{
 				token = NextToken();
@@ -26,18 +38,14 @@ SYNTACTIC_STATES::E CSProgram::Evaluate(Token token, SYNTACTIC_STATES::E oldStat
 				token = NextToken();
 			}
 		}
-		bool flag = true;
-		while (token.svalue != "main" && token.svalue != "NULL")
+		else if (token.svalue == "main")
 		{
-			if (flag)
+			phaseFuncProc = true;
+			if (phaseMain)
 			{
-				flag = false;
-				m_errorHandler->AddError(ERROR28, "sintactico", token.line);
+				m_errorHandler->AddError(ERROR32, "sintactico", token.line);
 			}
-			token = NextToken();
-		}
-		if (token.svalue == "main")
-		{
+			phaseMain = true;
 			token = NextToken();
 			if (token.svalue != "(")
 			{
@@ -54,10 +62,12 @@ SYNTACTIC_STATES::E CSProgram::Evaluate(Token token, SYNTACTIC_STATES::E oldStat
 			}
 			(*m_States)[SYNTACTIC_STATES::SBlock]->Evaluate(token, SYNTACTIC_STATES::SPROGRAM, "main");
 		}
-		else
-		{
-			m_errorHandler->AddError(ERROR17, "sintactico");
-		}
+		token = NextToken();
+
+	}
+	if (!phaseMain)
+	{
+		m_errorHandler->AddError(ERROR17, "sintactico");
 	}
 	return SYNTACTIC_STATES::SPROGRAM;
 }

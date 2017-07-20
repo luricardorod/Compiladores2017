@@ -198,6 +198,11 @@ int	Keyword
 :	Delimiter
 int	Keyword
 {	Group Operators
+var	Keyword
+z	Id
+:	Delimiter
+int	Keyword
+;	Delimiter
 if	Keyword
 (	Group Operators
 x	Id

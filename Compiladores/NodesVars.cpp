@@ -140,12 +140,51 @@ void CNodesVars::errorCategory(std::string category, int line)
 	}
 }
 
+std::string localNodeToText(LocalNode localnode) {
+	std::string text;
+	
+	text += localnode.m_category + "," + localnode.m_type + "," + localnode.m_parent + "," + std::to_string(localnode.m_dimension) + ",[";
+	for (int i = 0; i < localnode.m_values.size(); i++)
+	{
+		text += localnode.m_values[i];
+		if (i + 1 < localnode.m_values.size())
+		{
+			text += ",";
+		}
+	}
+	text += "]{";
+	if (localnode.m_next != NULL)
+	{
+		text += localNodeToText(*localnode.m_next);
+	}
+	text += "}";
+	return text;
+}
 std::string CNodesVars::GetNodes()
 {
 	Nodes;
-	return "";
+	std::string text = "";
+	for (auto globalNode = Nodes.begin(); globalNode != Nodes.end(); globalNode++)
+	{
+		text += globalNode->m_name + "," + globalNode->m_category + "," + globalNode->m_type + ",";
+		text += std::to_string(globalNode->m_dimension) + ",[";
+		for (int i = 0; i < globalNode->m_values.size(); i++)
+		{
+			text += globalNode->m_values[i];
+			if (i + 1 < globalNode->m_values.size())
+			{
+				text += ",";
+			}
+		}
+		text += "],{";
+		if (globalNode->m_nextLocal != NULL)
+		{
+			text += localNodeToText(*globalNode->m_nextLocal);
+		}
+		text += "},0;\n";
+	}
+	return text;
 }
-
 
 CNodesVars::CNodesVars()
 {

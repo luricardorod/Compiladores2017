@@ -41,7 +41,7 @@ void Compiladores::compile()
 	CSyntacticAnalysis sintacticAnalysis;
 
 	sintacticAnalysis.Compile(&tokenizer, &errorHandler, &nodes);
-	
+	m_nodes = nodes.GetNodes();
 
 	m_errors = errorHandler.GetErrors();
 	nodes.GetNodes();
@@ -68,6 +68,10 @@ void Compiladores::save()
 	std::ofstream err("errors.lex", std::ofstream::out);
 	err << m_errors;
 	err.close();
+
+	std::ofstream syn("syn.lex", std::ofstream::out);
+	syn << m_nodes;
+	syn.close();
 }
 
 void Compiladores::exit()

@@ -30,10 +30,9 @@ const std::string ERROR26 = "se esperaba  termino";
 const std::string ERROR27 = "se esperaba  }";
 const std::string ERROR28 = "se esperaba funcion/procedimiento";
 const std::string ERROR29 = "Declaracion de variables al principio de la funcion";
-
-
-
-
+const std::string ERROR30 = "Declaracion de variables globales al principio del programa";
+const std::string ERROR31 = "Declaracion de Funciones o procedimientos des pues de variables globales";
+const std::string ERROR32 = "Funcion main repetida";
 
 
 class CErrorHandler
