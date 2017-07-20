@@ -16,6 +16,7 @@ SYNTACTIC_STATES::E CSProgram::Evaluate(Token token, SYNTACTIC_STATES::E oldStat
 			{
 				token = NextToken();
 				(*m_States)[SYNTACTIC_STATES::SFUNCTION]->Evaluate(token, SYNTACTIC_STATES::SPROGRAM);
+				token = NextToken();
 			}
 			else
 			{

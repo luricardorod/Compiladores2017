@@ -29,6 +29,8 @@ const std::string ERROR25 = "se esperaba  )";
 const std::string ERROR26 = "se esperaba  termino";
 const std::string ERROR27 = "se esperaba  }";
 const std::string ERROR28 = "se esperaba funcion/procedimiento";
+const std::string ERROR29 = "Declaracion de variables al principio de la funcion";
+
 
 
 

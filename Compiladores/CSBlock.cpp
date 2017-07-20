@@ -20,7 +20,18 @@ SYNTACTIC_STATES::E CSBlock::Evaluate(Token token, SYNTACTIC_STATES::E oldState,
 	{
 		if (token.svalue == "var")
 		{
-			(*m_States)[SYNTACTIC_STATES::SVAR]->Evaluate(token, oldState, parent);
+			if (oldState == SYNTACTIC_STATES::SPROCESS || oldState == SYNTACTIC_STATES::SFUNCTION || oldState == SYNTACTIC_STATES::SPROGRAM)
+			{
+				(*m_States)[SYNTACTIC_STATES::SVAR]->Evaluate(token, oldState, parent);
+			}
+			else
+			{
+				m_errorHandler->AddError(ERROR29, "sintactico", token.line);
+				while (token.svalue != ";" && token.svalue != "NULL")
+				{
+					token = NextToken();
+				}
+			}
 		}
 		else if (token.svalue == "if" || token.svalue == "while")
 		{
