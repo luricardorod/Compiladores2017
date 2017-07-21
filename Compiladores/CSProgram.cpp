@@ -15,7 +15,6 @@ SYNTACTIC_STATES::E CSProgram::Evaluate(Token token, SYNTACTIC_STATES::E oldStat
 				m_errorHandler->AddError(ERROR30, "sintactico", token.line);
 			}
 			(*m_States)[SYNTACTIC_STATES::SVAR]->Evaluate(token, SYNTACTIC_STATES::SPROGRAM);
-			token = NextToken();
 		}
 		else if (token.svalue == "function" || token.svalue == "procedure")
 		{
@@ -28,14 +27,12 @@ SYNTACTIC_STATES::E CSProgram::Evaluate(Token token, SYNTACTIC_STATES::E oldStat
 			{
 				token = NextToken();
 				(*m_States)[SYNTACTIC_STATES::SFUNCTION]->Evaluate(token, SYNTACTIC_STATES::SPROGRAM);
-				token = NextToken();
 			}
 			else
 			{
 				token = NextToken();
 				(*m_States)[SYNTACTIC_STATES::SPROCESS]->Evaluate(token, SYNTACTIC_STATES::SPROGRAM);
 				(*m_indexToken)--;
-				token = NextToken();
 			}
 		}
 		else if (token.svalue == "main")
@@ -60,7 +57,7 @@ SYNTACTIC_STATES::E CSProgram::Evaluate(Token token, SYNTACTIC_STATES::E oldStat
 			{
 				m_errorHandler->AddError(ERROR25, "sintactico", token.line);
 			}
-			(*m_States)[SYNTACTIC_STATES::SBlock]->Evaluate(token, SYNTACTIC_STATES::SPROGRAM, "main");
+			(*m_States)[SYNTACTIC_STATES::SBlock]->Evaluate(token, SYNTACTIC_STATES::SPROCESS, "main");
 		}
 		token = NextToken();
 

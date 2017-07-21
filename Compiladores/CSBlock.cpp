@@ -45,17 +45,18 @@ SYNTACTIC_STATES::E CSBlock::Evaluate(Token token, SYNTACTIC_STATES::E oldState,
 				{
 					(*m_indexToken) -= 2;
 				}
-				else
-				{
-					(*m_indexToken)--;
-				}
 			}
 			(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBlock, "");
 			token = NextToken();
 			if (token.svalue != ")")
 			{
 				m_errorHandler->AddError(ERROR25, "sintactico", token.line);
-				(*m_indexToken)--;
+				token = NextToken();
+
+				if (token.svalue != ")")
+				{
+					(*m_indexToken) -= 2;
+				}
 			}
 			(*m_States)[SYNTACTIC_STATES::SBlock]->Evaluate(token, SYNTACTIC_STATES::SBlock);
 		}

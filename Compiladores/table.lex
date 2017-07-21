@@ -50,6 +50,30 @@ a	Id
 :	Delimiter
 float	Keyword
 ;	Delimiter
+if	Keyword
+(	Group Operators
+(	Group Operators
+(	Group Operators
+(	Group Operators
+x	Id
++	AritmeticOperator
+y	Id
++	AritmeticOperator
+3	Int
+)	Group Operators
+-	AritmeticOperator
+1	Int
+)	Group Operators
+>	Relacional Operator
+5	Int
+)	Group Operators
+)	Group Operators
+{	Group Operators
+w	Id
+=	Assign
+10	Int
+;	Delimiter
+}	Group Operators
 firstvar	Id
 =	Assign
 secondvar	Id
@@ -149,30 +173,6 @@ z	Id
 )	Group Operators
 {	Group Operators
 }	Group Operators
-if	Keyword
-(	Group Operators
-(	Group Operators
-(	Group Operators
-(	Group Operators
-x	Id
-+	AritmeticOperator
-y	Id
-+	AritmeticOperator
-3	Int
-)	Group Operators
--	AritmeticOperator
-1	Int
-)	Group Operators
->	Relacional Operator
-5	Int
-)	Group Operators
-)	Group Operators
-{	Group Operators
-w	Id
-=	Assign
-10	Int
-;	Delimiter
-}	Group Operators
 while	Keyword
 (	Group Operators
 z	Id
@@ -198,11 +198,6 @@ int	Keyword
 :	Delimiter
 int	Keyword
 {	Group Operators
-var	Keyword
-z	Id
-:	Delimiter
-int	Keyword
-;	Delimiter
 if	Keyword
 (	Group Operators
 x	Id
