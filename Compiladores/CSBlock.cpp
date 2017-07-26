@@ -18,7 +18,10 @@ SYNTACTIC_STATES::E CSBlock::Evaluate(Token token, SYNTACTIC_STATES::E oldState,
 	token = NextToken();
 	while (token.svalue != "}" && token.svalue != "NULL")
 	{
-		if (token.svalue == "var")
+		if (token.svalue == ";") {
+
+		}
+		else if (token.svalue == "var")
 		{
 			if (oldState == SYNTACTIC_STATES::SPROCESS || oldState == SYNTACTIC_STATES::SFUNCTION || oldState == SYNTACTIC_STATES::SPROGRAM)
 			{
@@ -119,22 +122,6 @@ SYNTACTIC_STATES::E CSBlock::Evaluate(Token token, SYNTACTIC_STATES::E oldState,
 			token = NextToken();
 			if (token.svalue == "=")
 			{
-				token = NextToken();
-
-				if (token.itype != LEXIC_STATES::lID && token.itype != LEXIC_STATES::lNUMBERINT && token.itype != LEXIC_STATES::lNUMBERFLOAT && token.itype != LEXIC_STATES::lCONSTANTALFANUMERIC)
-				{
-					m_errorHandler->AddError(ERROR10, "sintactico", token.line);
-					token = NextToken();
-
-					if (token.itype != LEXIC_STATES::lID && token.itype != LEXIC_STATES::lNUMBERINT && token.itype != LEXIC_STATES::lNUMBERFLOAT && token.itype != LEXIC_STATES::lCONSTANTALFANUMERIC)
-					{
-						while (token.svalue != ";" && token.svalue != "}" && token.svalue != "NULL")
-						{
-							token = NextToken();
-						}
-					}
-				}
-				(*m_indexToken)--;
 				(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBlock);
 				token = NextToken();
 
