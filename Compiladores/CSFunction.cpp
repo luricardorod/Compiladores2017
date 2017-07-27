@@ -68,7 +68,7 @@ SYNTACTIC_STATES::E CSFunction::Evaluate(Token token, SYNTACTIC_STATES::E oldSta
 			return SYNTACTIC_STATES::SPROGRAM;
 		}
 		m_nodes->addGlobalNode(tempGlobal, token.line);
-		(*m_States)[SYNTACTIC_STATES::SBlock]->Evaluate(token, SYNTACTIC_STATES::SFUNCTION, tempGlobal.m_name);
+		(*m_States)[SYNTACTIC_STATES::SBLOCK]->Evaluate(token, SYNTACTIC_STATES::SFUNCTION, tempGlobal.m_name);
 		////////////block
 		
 	}

@@ -50,7 +50,7 @@ SYNTACTIC_STATES::E CSProcess::Evaluate(Token token, SYNTACTIC_STATES::E oldStat
 		tempGlobal.m_type = "NULL";
 
 		m_nodes->addGlobalNode(tempGlobal, token.line);
-		(*m_States)[SYNTACTIC_STATES::SBlock]->Evaluate(token, SYNTACTIC_STATES::SFUNCTION, tempGlobal.m_name);
+		(*m_States)[SYNTACTIC_STATES::SBLOCK]->Evaluate(token, SYNTACTIC_STATES::SFUNCTION, tempGlobal.m_name);
 		////////////block
 
 	}

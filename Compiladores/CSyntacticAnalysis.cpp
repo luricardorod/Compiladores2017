@@ -7,6 +7,11 @@
 #include "CSMain.h"
 #include "CSExpression.h"
 #include "CSTerm.h"
+#include "CSFor.h"
+#include "CSSwitch.h"
+#include "CSAssign.h"
+#include "CSIf.h"
+
 
 void CSyntacticAnalysis::Compile(CTokenizer * tokenaizer, CErrorHandler* errorHandler, CNodesVars* nodes)
 {
@@ -35,9 +40,14 @@ CSyntacticAnalysis::CSyntacticAnalysis()
 	m_States[SYNTACTIC_STATES::SPROCESS] = new CSProcess;
 	m_States[SYNTACTIC_STATES::SFUNCTION] = new CSFunction;
 	m_States[SYNTACTIC_STATES::SMAIN] = new CSMain;
-	m_States[SYNTACTIC_STATES::SBlock] = new CSBlock;
+	m_States[SYNTACTIC_STATES::SBLOCK] = new CSBlock;
 	m_States[SYNTACTIC_STATES::SEXPRESSION] = new CSExpression;
 	m_States[SYNTACTIC_STATES::STERM] = new CSTerm;
+	m_States[SYNTACTIC_STATES::SASSINGCALL] = new CSAssign;
+	m_States[SYNTACTIC_STATES::SFOR] = new CSFor;
+	m_States[SYNTACTIC_STATES::SSWITCH] = new CSSwitch;
+	m_States[SYNTACTIC_STATES::SIF] = new CSIf;
+
 	m_indexToken = -1;
 }
 

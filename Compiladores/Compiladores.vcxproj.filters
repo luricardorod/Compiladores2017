@@ -131,6 +131,18 @@
     <ClCompile Include="CSTerm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CSIf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CSAssign.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CSSwitch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CSFor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="compiladores.h">
@@ -232,6 +244,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CSTerm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CSIf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CSAssign.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CSSwitch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CSFor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

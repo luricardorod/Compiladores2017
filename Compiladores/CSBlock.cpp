@@ -49,7 +49,7 @@ SYNTACTIC_STATES::E CSBlock::Evaluate(Token token, SYNTACTIC_STATES::E oldState,
 					(*m_indexToken) -= 2;
 				}
 			}
-			(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBlock, "");
+			(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBLOCK, "");
 			token = NextToken();
 			if (token.svalue != ")")
 			{
@@ -61,7 +61,7 @@ SYNTACTIC_STATES::E CSBlock::Evaluate(Token token, SYNTACTIC_STATES::E oldState,
 					(*m_indexToken) -= 2;
 				}
 			}
-			(*m_States)[SYNTACTIC_STATES::SBlock]->Evaluate(token, SYNTACTIC_STATES::SBlock);
+			(*m_States)[SYNTACTIC_STATES::SBLOCK]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
 		}
 		else if (token.svalue == "for")
 		{
@@ -91,7 +91,7 @@ SYNTACTIC_STATES::E CSBlock::Evaluate(Token token, SYNTACTIC_STATES::E oldState,
 					}
 				}
 				(*m_indexToken)--;
-				(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBlock);
+				(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
 				token = NextToken();
 
 				if (token.svalue != ";")
@@ -99,18 +99,18 @@ SYNTACTIC_STATES::E CSBlock::Evaluate(Token token, SYNTACTIC_STATES::E oldState,
 					m_errorHandler->AddError(ERROR10, "sintactico", token.line);
 				}
 			}
-			(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBlock);
+			(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
 			token = NextToken();
 			if (token.svalue != ";")
 			{
 				m_errorHandler->AddError(ERROR10, "sintactico", token.line);
 			}
-			(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBlock);
+			(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
 			if (token.svalue != ")")
 			{
 				m_errorHandler->AddError(ERROR25, "sintactico", token.line);
 			}
-			(*m_States)[SYNTACTIC_STATES::SBlock]->Evaluate(token, SYNTACTIC_STATES::SBlock);
+			(*m_States)[SYNTACTIC_STATES::SBLOCK]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
 
 		}
 		else if (token.svalue == "switch")
@@ -122,7 +122,7 @@ SYNTACTIC_STATES::E CSBlock::Evaluate(Token token, SYNTACTIC_STATES::E oldState,
 			token = NextToken();
 			if (token.svalue == "=")
 			{
-				(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBlock);
+				(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
 				token = NextToken();
 
 				if (token.svalue != ";")
@@ -132,7 +132,7 @@ SYNTACTIC_STATES::E CSBlock::Evaluate(Token token, SYNTACTIC_STATES::E oldState,
 			}
 			else if (token.svalue == "(")
 			{
-				(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBlock);
+				(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
 				token = NextToken();
 				if (token.svalue != ")")
 				{

@@ -57,7 +57,7 @@ SYNTACTIC_STATES::E CSProgram::Evaluate(Token token, SYNTACTIC_STATES::E oldStat
 			{
 				m_errorHandler->AddError(ERROR25, "sintactico", token.line);
 			}
-			(*m_States)[SYNTACTIC_STATES::SBlock]->Evaluate(token, SYNTACTIC_STATES::SPROCESS, "main");
+			(*m_States)[SYNTACTIC_STATES::SBLOCK]->Evaluate(token, SYNTACTIC_STATES::SPROCESS, "main");
 		}
 		token = NextToken();
 
