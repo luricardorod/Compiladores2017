@@ -11,6 +11,7 @@
 #include "CSSwitch.h"
 #include "CSAssign.h"
 #include "CSIf.h"
+#include "CSCondition.h"
 
 
 void CSyntacticAnalysis::Compile(CTokenizer * tokenaizer, CErrorHandler* errorHandler, CNodesVars* nodes)
@@ -47,7 +48,7 @@ CSyntacticAnalysis::CSyntacticAnalysis()
 	m_States[SYNTACTIC_STATES::SFOR] = new CSFor;
 	m_States[SYNTACTIC_STATES::SSWITCH] = new CSSwitch;
 	m_States[SYNTACTIC_STATES::SIF] = new CSIf;
-
+	m_States[SYNTACTIC_STATES::SCONDITIONAL] = new CSCondition;
 	m_indexToken = -1;
 }
 

@@ -143,6 +143,9 @@
     <ClCompile Include="CSFor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CSCondition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="compiladores.h">
@@ -256,6 +259,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CSFor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CSCondition.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

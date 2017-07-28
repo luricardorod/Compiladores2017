@@ -156,6 +156,7 @@
     <ClCompile Include="compiladores.cpp" />
     <ClCompile Include="CSAssign.cpp" />
     <ClCompile Include="CSBlock.cpp" />
+    <ClCompile Include="CSCondition.cpp" />
     <ClCompile Include="CSExpression.cpp" />
     <ClCompile Include="CSFor.cpp" />
     <ClCompile Include="CSFunction.cpp" />
@@ -249,6 +250,7 @@
     <ClInclude Include="CLRelacionalOperators.h" />
     <ClInclude Include="CSAssign.h" />
     <ClInclude Include="CSBlock.h" />
+    <ClInclude Include="CSCondition.h" />
     <ClInclude Include="CSExpression.h" />
     <ClInclude Include="CSFor.h" />
     <ClInclude Include="CSFunction.h" />

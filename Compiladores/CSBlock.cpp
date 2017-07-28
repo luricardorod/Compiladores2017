@@ -38,120 +38,36 @@ SYNTACTIC_STATES::E CSBlock::Evaluate(Token token, SYNTACTIC_STATES::E oldState,
 		}
 		else if (token.svalue == "if" || token.svalue == "while")
 		{
-			token = NextToken();
-			if (token.svalue != "(")
-			{
-				m_errorHandler->AddError(ERROR19, "sintactico", token.line);
-				token = NextToken();
-				
-				if (token.svalue != "(")
-				{
-					(*m_indexToken) -= 2;
-				}
-			}
-			(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBLOCK, "");
-			token = NextToken();
-			if (token.svalue != ")")
-			{
-				m_errorHandler->AddError(ERROR25, "sintactico", token.line);
-				token = NextToken();
+			(*m_States)[SYNTACTIC_STATES::SIF]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
 
-				if (token.svalue != ")")
-				{
-					(*m_indexToken) -= 2;
-				}
-			}
-			(*m_States)[SYNTACTIC_STATES::SBLOCK]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
+			
 		}
 		else if (token.svalue == "for")
 		{
-			token = NextToken();
-			if (token.svalue != "(")
-			{
-				m_errorHandler->AddError(ERROR19, "sintactico", token.line);
-			}
-			token = NextToken();
-			token = NextToken();
-
-			if (token.svalue == "=")
-			{
-				token = NextToken();
-
-				if (token.itype != LEXIC_STATES::lID && token.itype != LEXIC_STATES::lNUMBERINT && token.itype != LEXIC_STATES::lNUMBERFLOAT && token.itype != LEXIC_STATES::lCONSTANTALFANUMERIC)
-				{
-					m_errorHandler->AddError(ERROR10, "sintactico", token.line);
-					token = NextToken();
-
-					if (token.itype != LEXIC_STATES::lID && token.itype != LEXIC_STATES::lNUMBERINT && token.itype != LEXIC_STATES::lNUMBERFLOAT && token.itype != LEXIC_STATES::lCONSTANTALFANUMERIC)
-					{
-						while (token.svalue != ";" && token.svalue != "}" && token.svalue != "NULL")
-						{
-							token = NextToken();
-						}
-					}
-				}
-				(*m_indexToken)--;
-				(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
-				token = NextToken();
-
-				if (token.svalue != ";")
-				{
-					m_errorHandler->AddError(ERROR10, "sintactico", token.line);
-				}
-			}
-			(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
-			token = NextToken();
-			if (token.svalue != ";")
-			{
-				m_errorHandler->AddError(ERROR10, "sintactico", token.line);
-			}
-			(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
-			if (token.svalue != ")")
-			{
-				m_errorHandler->AddError(ERROR25, "sintactico", token.line);
-			}
-			(*m_States)[SYNTACTIC_STATES::SBLOCK]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
+			(*m_States)[SYNTACTIC_STATES::SFOR]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
 
 		}
 		else if (token.svalue == "switch")
 		{
+			(*m_States)[SYNTACTIC_STATES::SSWITCH]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
 
 		}
 		else if (token.itype == LEXIC_STATES::lID)
 		{
-			token = NextToken();
-			if (token.svalue == "=")
-			{
-				(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
-				token = NextToken();
+			(*m_States)[SYNTACTIC_STATES::SASSINGCALL]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
 
-				if (token.svalue != ";")
-				{
-					m_errorHandler->AddError(ERROR10, "sintactico", token.line);
-				}
-			}
-			else if (token.svalue == "(")
+		}
+		else if (token.svalue == "return")
+		{
+			token = NextToken();
+			if (token.svalue != ";")
 			{
+				(*m_indexToken)--;
 				(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
 				token = NextToken();
-				if (token.svalue != ")")
-				{
-					m_errorHandler->AddError(ERROR10, "sintactico", token.line);
-					token = NextToken();
-					if (token.svalue != ";")
-					{
-						m_errorHandler->AddError(ERROR10, "sintactico", token.line);
-						while (token.svalue != ";" && token.svalue != "}" && token.svalue != "NULL")
-						{
-							token = NextToken();
-						}
-					}
-				}
-				token = NextToken();
 				if (token.svalue != ";")
 				{
 					m_errorHandler->AddError(ERROR10, "sintactico", token.line);
-					(*m_indexToken)--;
 				}
 			}
 		}

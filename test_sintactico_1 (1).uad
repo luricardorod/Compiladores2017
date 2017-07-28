@@ -10,39 +10,39 @@ procedure		myproc (x,y:int; z:string){
 	var z : int; /* ERROR: variable z ya definida como parametro */
 	var w : int;
 	var a : float;
-	
+
 	firstvar = secondvar;
 	if(!firstvar)
 	{
 	    secondvar = secondvar*3.0;
 	}
-	
+
 	if(firstvar && secondvar)
 	{
 	    z = (((((((((1)))))))));
 	}
-	
+
 	z = 100;;;
-	
+
 	if 9 (z + 3) /* ERROR: se esperaba '(' */
 	{
-	    w = 1 
+	    w = 1
 	} /* ERROR: se esperaba ';' */
-	
+
 	while (z + 2 { /* ERROR: se esperaba ')' */
 	    w = 2;
 	}
-	
+
 	if z + 2) /* ERROR: se esperaba '(' */
 	{
 	    w = 3;
 	}
-	
+
 	while z + 2 /* ERROR: se esperaba '('. ERROR: se esperaba ')' */
 	{
 	    w = 5;
 	}
-	
+
 	if (z 2) /* ERROR : se esperaba OPERADOR */
 	{
 	    w == 4; /* ERROR: se esperaba EXPR */
@@ -50,53 +50,53 @@ procedure		myproc (x,y:int; z:string){
 	else
 	{
 	}
-	
+
 	if(a > 1)
 	else
 	{}
-	
+
 	while (z > 1)
 	{
 	}
-	
+
 	if (){
-	}	
-	
+	}
+
 	while ) z > 10 )
 	{
 	}
-	
+
 	if((((x + y + 3) - 1) > 5))
 	{
 	    w = 10;
 	}
-	
+
 	for(i = 0, (i < 10), i = i + 1)
 	{
 	    a = a + i;
-		
+
 		for(j = 0; j + a; )
 		{
 		}
 	}
-	
+
 	switch(id)
 	{
-        1 ; 
+        1 ;
         {
 		    var wrong : int;
 		    a = a * 10;
-        }		
+        }
         default :
 		{
 		    a = a;
 		}
-		2 : 
+		2 :
         {
 		    a = a / 10;
-        }		
+        }
 	}
-	
+
 	while (z < 1)
 	{
 	}}
@@ -111,7 +111,7 @@ function facIter(x: int) : int
 	{
 	    return 1;
 	}
-	
+
     return facIter(x-1);
 }
 
@@ -132,13 +132,13 @@ procedure c123()
 {
 }
 
-/* 
+/*
 */
 main()
 {
    var b : float;
    var c = 9.5;
-   
+
    while( b > 3.0 )
    {
        if(c < 1.0)

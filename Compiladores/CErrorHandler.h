@@ -33,6 +33,9 @@ const std::string ERROR29 = "Declaracion de variables al principio de la funcion
 const std::string ERROR30 = "Declaracion de variables globales al principio del programa";
 const std::string ERROR31 = "Declaracion de Funciones o procedimientos des pues de variables globales";
 const std::string ERROR32 = "Funcion main repetida";
+const std::string ERROR33 = "se esperaba id";
+const std::string ERROR34 = "se esperaba operador relacional";
+const std::string ERROR35 = "se esperaba =";
 
 
 class CErrorHandler
