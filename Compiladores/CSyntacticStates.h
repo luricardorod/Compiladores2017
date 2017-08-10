@@ -106,7 +106,7 @@ public:
 		}
 		return 0;
 	}
-	int GroupParams(std::string parent) {
+	int GroupParams(std::string parent, std::vector<std::string> * typesParams) {
 		Token token = NextToken();
 		
 		std::vector<LocalNode> localnodes;
@@ -137,6 +137,7 @@ public:
 				{
 					i->m_type = type;
 					m_nodes->addLocalNode(*i, token.line);
+					(*typesParams).push_back(type);
 				}
 				localnodes.clear();
 				token = NextToken();

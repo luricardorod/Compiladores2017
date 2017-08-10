@@ -22,7 +22,7 @@ SYNTACTIC_STATES::E CSFunction::Evaluate(Token token, SYNTACTIC_STATES::E oldSta
 	token = NextToken();
 	if (token.svalue == "(")
 	{
-		int i = GroupParams(tempGlobal.m_name);
+		int i = GroupParams(tempGlobal.m_name, &tempGlobal.m_values);
 		if (i != 0)
 		{
 			if (i==4)
@@ -67,6 +67,7 @@ SYNTACTIC_STATES::E CSFunction::Evaluate(Token token, SYNTACTIC_STATES::E oldSta
 			}
 			return SYNTACTIC_STATES::SPROGRAM;
 		}
+		tempGlobal.m_dimension = tempGlobal.m_values.size();
 		m_nodes->addGlobalNode(tempGlobal, token.line);
 		(*m_States)[SYNTACTIC_STATES::SBLOCK]->Evaluate(token, SYNTACTIC_STATES::SFUNCTION, tempGlobal.m_name);
 		////////////block

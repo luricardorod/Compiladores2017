@@ -19,7 +19,10 @@ void CNodesVars::addGlobalNode(GlobalNode globalNode, int line) {
 	{
 		globalNode.m_nextGlobal = NULL;
 		globalNode.m_nextLocal = NULL;
-		globalNode.m_values.resize(globalNode.m_dimension);
+		if (globalNode.m_values.size() == 0)
+		{
+			globalNode.m_values.resize(globalNode.m_dimension);
+		}
 		Nodes.push_back(globalNode);
 	}
 	else
@@ -29,6 +32,7 @@ void CNodesVars::addGlobalNode(GlobalNode globalNode, int line) {
 			(*node).m_category = globalNode.m_category;
 			(*node).m_dimension = globalNode.m_dimension;
 			(*node).m_type = globalNode.m_type;
+			(*node).m_values = globalNode.m_values;
 			return;
 		}
 		if (node->m_category == "var" && node->m_category == globalNode.m_category)
