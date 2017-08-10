@@ -24,6 +24,13 @@ void CNodesVars::addGlobalNode(GlobalNode globalNode, int line) {
 	}
 	else
 	{
+		if (node->m_category == "indef")
+		{
+			(*node).m_category = globalNode.m_category;
+			(*node).m_dimension = globalNode.m_dimension;
+			(*node).m_type = globalNode.m_type;
+			return;
+		}
 		if (node->m_category == "var" && node->m_category == globalNode.m_category)
 		{
 			m_errorHandler->AddError(ERROR13, "sintactico", line);

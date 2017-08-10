@@ -1,40 +1,4 @@
-﻿  CErrorHandler.cpp
-  CLAritmeticOperators.cpp
-  CLAssign.cpp
-  CLCloseDimensionOperator.cpp
-  CLComments.cpp
-  CLConstantAlfanumeric.cpp
-  CLDelimiters.cpp
-  CLexicalAnalysis.cpp
-  CLGroupOperators.cpp
-  CLId.cpp
-  CLLogicOperators.cpp
-  CLNone.cpp
-  CLNumberFloat.cpp
-  CLNumberInt.cpp
-  CLOpenDimensionOperator.cpp
-  CLRelacionalOperators.cpp
-  compiladores.cpp
-  CSAssign.cpp
-  CSBlock.cpp
-  CSCondition.cpp
-  Generating Code...
-  Compiling...
-  CSExpression.cpp
-  CSFor.cpp
-  CSFunction.cpp
-  CSIf.cpp
-  CSMain.cpp
-  CSProcess.cpp
-  CSProgram.cpp
-  CSSwitch.cpp
+﻿  CSAssign.cpp
   CSTerm.cpp
-  CSVar.cpp
-  CSyntacticAnalysis.cpp
-  CTokenizer.cpp
-  moc_compiladores.cpp
-  main.cpp
-  NodesVars.cpp
   Generating Code...
-  qrc_compiladores.cpp
   Compiladores.vcxproj -> E:\UAD\6to\Compiladores2017\x64\Release\Compiladores.exe

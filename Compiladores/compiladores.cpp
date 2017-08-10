@@ -2,6 +2,7 @@
 #include <string>
 #include "CLexicalAnalysis.h"
 #include "CSyntacticAnalysis.h"
+#include "CSemanticAnalysis.h"
 #include "CTokenizer.h"
 #include "CErrorHandler.h"
 #include "NodesVars.h"
@@ -42,6 +43,9 @@ void Compiladores::compile()
 
 	sintacticAnalysis.Compile(&tokenizer, &errorHandler, &nodes);
 	m_nodes = nodes.GetNodes();
+
+	CSemanticAnalysis semanticAnalysis;
+	semanticAnalysis.Compile(&tokenizer, &errorHandler, &nodes);
 
 	m_errors = errorHandler.GetErrors();
 	nodes.GetNodes();

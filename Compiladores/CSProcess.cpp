@@ -3,7 +3,7 @@
 SYNTACTIC_STATES::E CSProcess::Evaluate(Token token, SYNTACTIC_STATES::E oldState, std::string parent)
 {
 	GlobalNode tempGlobal;
-	tempGlobal.m_category = "function";
+	tempGlobal.m_category = "procedure";
 	tempGlobal.m_type = "NULL";
 	tempGlobal.m_dimension = 0;
 	if (token.itype != LEXIC_STATES::lID)

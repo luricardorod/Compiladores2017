@@ -37,6 +37,16 @@ SYNTACTIC_STATES::E CSSwitch::Evaluate(Token token, SYNTACTIC_STATES::E oldState
 		(*m_States)[SYNTACTIC_STATES::SBLOCK]->Evaluate(token, oldState, parent);
 		token = NextToken();
 	}
+	if (token.svalue != "default")
+	{
+		token = NextToken();
+		if (token.svalue != ":")
+		{
+			m_errorHandler->AddError(ERROR21, "sintactico", token.line);
+		}
+		(*m_States)[SYNTACTIC_STATES::SBLOCK]->Evaluate(token, oldState, parent);
+		token = NextToken();
+	}
 	if (token.svalue != "}")
 	{
 		m_errorHandler->AddError(ERROR27, "sintactico", token.line);

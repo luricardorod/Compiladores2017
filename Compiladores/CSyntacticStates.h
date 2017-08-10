@@ -1,7 +1,6 @@
 #pragma once
 #include "CErrorHandler.h"
 #include "CTokenizer.h"
-#include <string>
 #include "NodesVars.h"
 
 namespace SYNTACTIC_STATES

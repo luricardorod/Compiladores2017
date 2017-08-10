@@ -23,17 +23,9 @@ SYNTACTIC_STATES::E CSTerm::Evaluate(Token token, SYNTACTIC_STATES::E oldState, 
 		token = NextToken();
 		if (token.svalue == "[")
 		{
-			int dim = ProcessDimension();
-			if (dim == -1)
-			{
-				m_errorHandler->AddError(ERROR8, "Sintactico", token.line);
-				while (token.svalue != ")" && token.svalue != "NULL")
-				{
-					token = NextToken();
-				}
-				return SYNTACTIC_STATES::SPROGRAM;
-			}
-			else if (dim == -2)
+			(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SEXPRESSION);
+			token = NextToken();
+			if (token.svalue != "]")
 			{
 				m_errorHandler->AddError(ERROR12, "Sintactico", token.line);
 				while (token.svalue != ")" && token.svalue != "NULL")

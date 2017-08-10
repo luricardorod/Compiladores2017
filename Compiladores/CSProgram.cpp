@@ -32,7 +32,6 @@ SYNTACTIC_STATES::E CSProgram::Evaluate(Token token, SYNTACTIC_STATES::E oldStat
 			{
 				token = NextToken();
 				(*m_States)[SYNTACTIC_STATES::SPROCESS]->Evaluate(token, SYNTACTIC_STATES::SPROGRAM);
-				(*m_indexToken)--;
 			}
 		}
 		else if (token.svalue == "main")
@@ -58,6 +57,9 @@ SYNTACTIC_STATES::E CSProgram::Evaluate(Token token, SYNTACTIC_STATES::E oldStat
 				m_errorHandler->AddError(ERROR25, "sintactico", token.line);
 			}
 			(*m_States)[SYNTACTIC_STATES::SBLOCK]->Evaluate(token, SYNTACTIC_STATES::SPROCESS, "main");
+		}
+		else {
+			m_errorHandler->AddError(ERROR36, "sintactico", token.line);
 		}
 		token = NextToken();
 

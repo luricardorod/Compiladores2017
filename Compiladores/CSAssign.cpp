@@ -10,6 +10,20 @@ SYNTACTIC_STATES::E CSAssign::Evaluate(Token token, SYNTACTIC_STATES::E oldState
 		m_errorHandler->AddError(ERROR33, "sintactico", token.line);
 	}
 	token = NextToken();
+	if (token.svalue == "[")
+	{
+		(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
+		token = NextToken();
+		if (token.svalue != "]")
+		{
+			m_errorHandler->AddError(ERROR12, "Sintactico", token.line);
+			while (token.svalue != ")" && token.svalue != "NULL")
+			{
+				token = NextToken();
+			}
+		}
+		token = NextToken();
+	}
 	if (token.svalue == "=")
 	{
 		(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);

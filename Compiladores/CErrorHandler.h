@@ -36,6 +36,8 @@ const std::string ERROR32 = "Funcion main repetida";
 const std::string ERROR33 = "se esperaba id";
 const std::string ERROR34 = "se esperaba operador relacional";
 const std::string ERROR35 = "se esperaba =";
+const std::string ERROR36 = "se esperaba declaracion de variables funcion o precidimiento";
+
 
 
 class CErrorHandler
