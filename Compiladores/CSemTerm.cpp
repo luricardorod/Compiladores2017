@@ -2,7 +2,7 @@
 
 
 
-SEMANTIC_STATES::E CSemTerm::Evaluate(Token token, SEMANTIC_STATES::E oldState, std::string parent)
+SEMANTIC_STATES::E CSemTerm::Evaluate(Token token, SEMANTIC_STATES::E oldState, std::string parent, std::vector<Token>* expressionPosfija, std::vector<Token>* operators)
 {
 	token = NextToken();
 	if (token.svalue == "(")
@@ -16,15 +16,20 @@ SEMANTIC_STATES::E CSemTerm::Evaluate(Token token, SEMANTIC_STATES::E oldState, 
 	}
 	else if ( token.itype == LEXIC_STATES::lNUMBERINT || token.itype == LEXIC_STATES::lNUMBERFLOAT || token.itype == LEXIC_STATES::lCONSTANTALFANUMERIC)
 	{
+		(*expressionPosfija).push_back(token);
 		return SEMANTIC_STATES::E();
 	}
 	else if (token.itype == LEXIC_STATES::lID)
 	{
+		(*expressionPosfija).push_back(token);
 		token = NextToken();
 		if (token.svalue == "[")
 		{
+			(*expressionPosfija).push_back(token);
 			(*m_States)[SEMANTIC_STATES::SEXPRESSION]->Evaluate(token, SEMANTIC_STATES::SEXPRESSION);
 			token = NextToken();
+			(*expressionPosfija).push_back(token);
+
 			if (token.svalue != "]")
 			{
 				m_errorHandler->AddError(ERROR12, "Sintactico", token.line);
@@ -64,7 +69,8 @@ SEMANTIC_STATES::E CSemTerm::Evaluate(Token token, SEMANTIC_STATES::E oldState, 
 	}
 	else if (token.svalue == "!" || token.svalue == "-")
 	{
-		(*m_States)[SEMANTIC_STATES::STERM]->Evaluate(token, SEMANTIC_STATES::SEXPRESSION);
+		(*expressionPosfija).push_back(token);
+		(*m_States)[SEMANTIC_STATES::STERM]->Evaluate(token, SEMANTIC_STATES::STERM, "", expressionPosfija, NULL);
 	}
 	else
 	{
@@ -72,7 +78,7 @@ SEMANTIC_STATES::E CSemTerm::Evaluate(Token token, SEMANTIC_STATES::E oldState, 
 		token = NextToken();
 		if (token.svalue == "(" || (token.itype == LEXIC_STATES::lID) || (token.itype == LEXIC_STATES::lNUMBERINT || token.itype == LEXIC_STATES::lNUMBERFLOAT || token.itype == LEXIC_STATES::lCONSTANTALFANUMERIC) || (token.svalue == "!")) {
 			(*m_indexToken)--;
-			(*m_States)[SEMANTIC_STATES::STERM]->Evaluate(token, SEMANTIC_STATES::STERM);
+			(*m_States)[SEMANTIC_STATES::STERM]->Evaluate(token, SEMANTIC_STATES::STERM, "", expressionPosfija, NULL);
 		}
 		else
 		{
@@ -80,6 +86,11 @@ SEMANTIC_STATES::E CSemTerm::Evaluate(Token token, SEMANTIC_STATES::E oldState, 
 		}
 
 	}
+	return SEMANTIC_STATES::E();
+}
+
+SEMANTIC_STATES::E CSemTerm::Evaluate(Token token, SEMANTIC_STATES::E oldState, std::string parent)
+{
 	return SEMANTIC_STATES::E();
 }
 

@@ -28,7 +28,10 @@ class CSemanticStates
 {
 public:
 	virtual SEMANTIC_STATES::E Evaluate(Token token, SEMANTIC_STATES::E, std::string parent = "") = 0;
-	//virtual SYNTACTIC_STATES::E Enter(char character, std::string string) = 0;
+	
+	virtual SEMANTIC_STATES::E Evaluate(Token token, SEMANTIC_STATES::E oldState, std::string parent, std::vector<Token>* expressionPosfija, std::vector<Token>* operators) { return SEMANTIC_STATES::E(); };
+
+//virtual SYNTACTIC_STATES::E Enter(char character, std::string string) = 0;
 	//virtual void Exit() = 0;
 	CErrorHandler* m_errorHandler;
 	CTokenizer* m_tokenaizer;
@@ -162,8 +165,7 @@ public:
 		}
 		return 0;
 	}
-	bool isOperator() {
-		Token token = NextToken();
+	bool isOperator(Token token) {
 		return token.itype == LEXIC_STATES::lARITMETICOPERATORS || token.itype == LEXIC_STATES::lLOGICOPERATORS || token.itype == LEXIC_STATES::lRELACIONALOPERATORS;
 	}
 };

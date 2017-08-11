@@ -10,7 +10,7 @@ SEMANTIC_STATES::E CSemFor::Evaluate(Token token, SEMANTIC_STATES::E oldState, s
 	token = NextToken();
 	(*m_States)[SEMANTIC_STATES::SASSINGCALL]->Evaluate(token, SEMANTIC_STATES::SFOR);
 
-	(*m_States)[SEMANTIC_STATES::SCONDITIONAL]->Evaluate(token, SEMANTIC_STATES::SFOR);
+	(*m_States)[SEMANTIC_STATES::SEXPRESSION]->Evaluate(token, SEMANTIC_STATES::SFOR);
 
 	(*m_States)[SEMANTIC_STATES::SEXPRESSION]->Evaluate(token, SEMANTIC_STATES::SFOR);
 	token = NextToken();
