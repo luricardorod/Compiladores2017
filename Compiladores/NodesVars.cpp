@@ -197,6 +197,32 @@ std::string CNodesVars::GetNodes()
 	return text;
 }
 
+NODE_TYPES::E CNodesVars::GetType(std::string name)
+{
+	std::vector<GlobalNode>::iterator node;
+	NODE_TYPES::E value = NODE_TYPES::NODENULL;
+	if (name == "main")
+	{
+		return NODE_TYPES::MAIN;
+	}
+	for (node = Nodes.begin(); node != Nodes.end(); node++)
+	{
+		if (node->m_name == name)
+		{
+			if (node->m_category == "process")
+			{
+				return NODE_TYPES::PROCESS;
+			}
+			else if (node->m_category == "function")
+			{
+				return NODE_TYPES::FUNCTION;
+			}
+		}
+	}
+
+	return value;
+}
+
 CNodesVars::CNodesVars()
 {
 }

@@ -26,10 +26,11 @@ SEMANTIC_STATES::E CSemProgram::Evaluate(Token token, SEMANTIC_STATES::E oldStat
 		}
 		else if (token.svalue == "main")
 		{
-			
+			(*m_name) = "main";
 			token = NextToken();
 			token = NextToken();
 			(*m_States)[SEMANTIC_STATES::SBLOCK]->Evaluate(token, SEMANTIC_STATES::SPROCESS, "main");
+			(*m_name) = "NULL";
 		}
 		token = NextToken();
 

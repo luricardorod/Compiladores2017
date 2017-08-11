@@ -37,15 +37,24 @@ SEMANTIC_STATES::E CSemTerm::Evaluate(Token token, SEMANTIC_STATES::E oldState, 
 		}
 		else if (token.svalue == "(")
 		{
-			int i = GroupIds();
-			if (i)
-			{
-				m_errorHandler->AddError(ERROR23, "sintactico", token.line);
-				while (token.svalue != ")" && token.svalue != "NULL")
+			token = NextToken();
+			if (token.svalue != ")") {
+				(*m_indexToken)--;
+				(*m_States)[SEMANTIC_STATES::SEXPRESSION]->Evaluate(token, SEMANTIC_STATES::SBLOCK);
+				token = NextToken();
+				if (token.svalue != ")")
 				{
+					m_errorHandler->AddError(ERROR10, "sintactico", token.line);
 					token = NextToken();
+					if (token.svalue != ";")
+					{
+						m_errorHandler->AddError(ERROR10, "sintactico", token.line);
+						while (token.svalue != ";" && token.svalue != "}" && token.svalue != "NULL")
+						{
+							token = NextToken();
+						}
+					}
 				}
-				return SEMANTIC_STATES::E();
 			}
 		}
 		else

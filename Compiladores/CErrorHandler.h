@@ -37,6 +37,10 @@ const std::string ERROR33 = "se esperaba id";
 const std::string ERROR34 = "se esperaba operador relacional";
 const std::string ERROR35 = "se esperaba =";
 const std::string ERROR36 = "se esperaba declaracion de variables funcion o precidimiento";
+const std::string ERROR37 = "solo las funciones tienen return";
+const std::string ERROR38 = "falta return";
+
+
 
 
 

@@ -37,15 +37,24 @@ SYNTACTIC_STATES::E CSTerm::Evaluate(Token token, SYNTACTIC_STATES::E oldState, 
 		}
 		else if (token.svalue == "(")
 		{
-			int i = GroupIds();
-			if (i)
-			{
-				m_errorHandler->AddError(ERROR23, "sintactico", token.line);
-				while (token.svalue != ")" && token.svalue != "NULL")
+			token = NextToken();
+			if (token.svalue != ")") {
+				(*m_indexToken)--;
+				(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
+				token = NextToken();
+				if (token.svalue != ")")
 				{
+					m_errorHandler->AddError(ERROR10, "sintactico", token.line);
 					token = NextToken();
+					if (token.svalue != ";")
+					{
+						m_errorHandler->AddError(ERROR10, "sintactico", token.line);
+						while (token.svalue != ";" && token.svalue != "}" && token.svalue != "NULL")
+						{
+							token = NextToken();
+						}
+					}
 				}
-				return SYNTACTIC_STATES::E();
 			}
 		}
 		else

@@ -59,17 +59,13 @@ SYNTACTIC_STATES::E CSBlock::Evaluate(Token token, SYNTACTIC_STATES::E oldState,
 		}
 		else if (token.svalue == "return")
 		{
+			(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
 			token = NextToken();
 			if (token.svalue != ";")
 			{
-				(*m_indexToken)--;
-				(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
-				token = NextToken();
-				if (token.svalue != ";")
-				{
-					m_errorHandler->AddError(ERROR10, "sintactico", token.line);
-				}
+				m_errorHandler->AddError(ERROR10, "sintactico", token.line);
 			}
+			
 		}
 		else
 		{

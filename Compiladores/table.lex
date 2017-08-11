@@ -1,22 +1,21 @@
-procedure	Keyword
-lu	Id
-(	Group Operators
-)	Group Operators
-{	Group Operators
 var	Keyword
 lol	Id
 :	Delimiter
 int	Keyword
 ;	Delimiter
-}	Group Operators
-procedure	Keyword
-lol	Id
-(	Group Operators
-)	Group Operators
-{	Group Operators
-}	Group Operators
 main	Keyword
 (	Group Operators
 )	Group Operators
 {	Group Operators
+a	Id
+=	Assign
+asd	Id
+[	Open Dimension Operator
+3	Int
++	AritmeticOperator
+4	Int
+*	AritmeticOperator
+lol	Id
+]	Close Dimension Operator
+;	Delimiter
 }	Group Operators

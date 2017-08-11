@@ -2,6 +2,18 @@
 #include <string>
 #include <vector>
 #include "CErrorHandler.h"
+
+namespace NODE_TYPES
+{
+	enum E
+	{
+		NODENULL,
+		PROCESS,
+		FUNCTION,
+		MAIN,
+		TYPES_MAX
+	};
+}
 struct LocalNode {
 	std::string m_name;
 	std::string m_category;
@@ -31,6 +43,7 @@ public:
 	void addLocalNode(LocalNode localNode, int line);
 	void errorCategory(std::string category, int line);
 	std::string GetNodes();
+	NODE_TYPES::E GetType(std::string name);
 	CNodesVars();
 	~CNodesVars();
 };

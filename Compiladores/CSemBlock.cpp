@@ -3,6 +3,7 @@
 
 SEMANTIC_STATES::E CSemBlock::Evaluate(Token token, SEMANTIC_STATES::E oldState, std::string parent)
 {
+	bool flagReturn = false;
 	token = NextToken();
 	if (token.svalue != "{")
 	{
@@ -51,16 +52,17 @@ SEMANTIC_STATES::E CSemBlock::Evaluate(Token token, SEMANTIC_STATES::E oldState,
 		}
 		else if (token.svalue == "return")
 		{
+			flagReturn = true;
+			NODE_TYPES::E nodeType = m_nodes->GetType(*m_name);
+			if (nodeType != NODE_TYPES::FUNCTION)
+			{
+				m_errorHandler->AddError(ERROR37, "sintactico", token.line);
+			}
+			(*m_States)[SEMANTIC_STATES::SEXPRESSION]->Evaluate(token, SEMANTIC_STATES::SBLOCK);
 			token = NextToken();
 			if (token.svalue != ";")
 			{
-				(*m_indexToken)--;
-				(*m_States)[SEMANTIC_STATES::SEXPRESSION]->Evaluate(token, SEMANTIC_STATES::SBLOCK);
-				token = NextToken();
-				if (token.svalue != ";")
-				{
-					m_errorHandler->AddError(ERROR10, "sintactico", token.line);
-				}
+				m_errorHandler->AddError(ERROR10, "sintactico", token.line);
 			}
 		}
 		else
@@ -73,6 +75,14 @@ SEMANTIC_STATES::E CSemBlock::Evaluate(Token token, SEMANTIC_STATES::E oldState,
 	if (token.svalue != "}")
 	{
 		m_errorHandler->AddError(ERROR27, "sintactico", token.line);
+	}
+	NODE_TYPES::E nodeType = m_nodes->GetType(*m_name);
+	if (nodeType == NODE_TYPES::FUNCTION)
+	{
+		if (!flagReturn)
+		{
+			m_errorHandler->AddError(ERROR38, "sintactico", token.line);
+		}
 	}
 	return SEMANTIC_STATES::E();
 }
