@@ -10,7 +10,7 @@ procedure		myproc (x,y:int; z:string){
 	var z : int; /* ERROR: variable z ya definida como parametro */
 	var w : int;
 	var a : float;
-
+  a =a *10;
 	firstvar = secondvar;
 	if(!firstvar)
 	{

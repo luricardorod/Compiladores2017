@@ -3,7 +3,6 @@
 
 SEMANTIC_STATES::E CSemFunction::Evaluate(Token token, SEMANTIC_STATES::E oldState, std::string parent)
 {
-
 	if (token.itype != LEXIC_STATES::lID)
 	{
 		while (token.svalue != "}" && token.svalue != "NULL")

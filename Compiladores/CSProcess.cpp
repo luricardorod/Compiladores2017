@@ -3,8 +3,8 @@
 SYNTACTIC_STATES::E CSProcess::Evaluate(Token token, SYNTACTIC_STATES::E oldState, std::string parent)
 {
 	GlobalNode tempGlobal;
-	tempGlobal.m_category = "procedure";
-	tempGlobal.m_type = "NULL";
+	tempGlobal.m_category = CATEGORIES_EXPRESSION::PROCEDURE;
+	tempGlobal.m_type = LEXIC_STATES::lNONE;
 	tempGlobal.m_dimension = 0;
 	if (token.itype != LEXIC_STATES::lID)
 	{
@@ -47,7 +47,7 @@ SYNTACTIC_STATES::E CSProcess::Evaluate(Token token, SYNTACTIC_STATES::E oldStat
 			return SYNTACTIC_STATES::E();
 		}
 		
-		tempGlobal.m_type = "NULL";
+		tempGlobal.m_type = LEXIC_STATES::lNONE;
 		tempGlobal.m_dimension = tempGlobal.m_values.size();
 		m_nodes->addGlobalNode(tempGlobal, token.line);
 		(*m_States)[SYNTACTIC_STATES::SBLOCK]->Evaluate(token, SYNTACTIC_STATES::SFUNCTION, tempGlobal.m_name);

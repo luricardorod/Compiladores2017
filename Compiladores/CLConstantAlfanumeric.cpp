@@ -23,7 +23,7 @@ LEXIC_STATES::E CLConstantAlfanumeric::Evaluate(char character)
 		//error caracter invalido en constantealfanumerica
 	}
 
-	return LEXIC_STATES::lCONSTANTALFANUMERIC;
+	return LEXIC_STATES::lSTRING;
 }
 
 LEXIC_STATES::E CLConstantAlfanumeric::Enter(char character, std::string string)
@@ -31,14 +31,14 @@ LEXIC_STATES::E CLConstantAlfanumeric::Enter(char character, std::string string)
 	m_string = "";
 	m_bflagChangeState = false;
 	m_flagError = false;
-	return LEXIC_STATES::lCONSTANTALFANUMERIC;
+	return LEXIC_STATES::lSTRING;
 }
 
 std::string CLConstantAlfanumeric::Exit()
 {
 	if (m_bflagChangeState && !m_flagError)
 	{
-		m_tokenaizer->AddToken(m_string, "Constant Alfanumeric", LEXIC_STATES::lCONSTANTALFANUMERIC);
+		m_tokenaizer->AddToken(m_string, "Constant Alfanumeric", LEXIC_STATES::lSTRING);
 	}
 	return std::string();
 }

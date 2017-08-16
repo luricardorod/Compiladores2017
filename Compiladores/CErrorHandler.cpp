@@ -34,6 +34,28 @@ std::string CErrorHandler::GetErrors()
 	return m_Errors;
 }
 
+LEXIC_STATES::E CErrorHandler::SetType(std::string type)
+{
+	if (type == "float")
+	{
+		return LEXIC_STATES::lNUMBERFLOAT;
+	}
+	if (type == "string")
+	{
+		return LEXIC_STATES::lSTRING;
+	}
+	if (type == "bool")
+	{
+		return LEXIC_STATES::lBOOL;
+	}
+	if (type == "int")
+	{
+		return LEXIC_STATES::lNUMBERINT;
+	}
+
+	return LEXIC_STATES::lNONE;
+}
+
 CErrorHandler::CErrorHandler()
 {
 	

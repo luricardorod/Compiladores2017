@@ -1,6 +1,39 @@
 #pragma once
 #include <string>
-
+namespace LEXIC_STATES
+{
+	enum E
+	{
+		lNONE,
+		lID,			//a...z | A...Z | _ [<text>] done
+		lNUMBERINT,		//0...9 [number] done
+		lNUMBERFLOAT,	//[number] . [number] done
+		lCOMMENTS,		///*....*/ done
+		lLOGICOPERATORS, //&&, || , ! done
+		lARITMETICOPERATORS,  // +, -, *, / , %, ^ done
+		lRELACIONALOPERATORS, //<, >, <= , >= , == , != done
+		lASSIGN,     //= done
+		lSTRING, //"..." done
+		lDELIMITERS, // , ; : done
+		lGROUPOPERATORS, //(, ), { , } done
+		lOPENDIMENSIONOPERATOR, // [ done
+		lCLOSEDIMENSIONOPERATOR, // ] done
+		lKEYWORD,
+		lBOOL,
+		lSTATES_MAX
+	};
+}
+namespace CATEGORIES_EXPRESSION
+{
+	enum E
+	{
+		NULLCATEGORY,
+		VAR,
+		FUNCTION,
+		PROCEDURE,
+		MAIN
+	};
+}
 const std::string ERROR1 = "Caracter invalido";
 const std::string ERROR2 = "No se cerro el comentario";
 const std::string ERROR3 = "no cerro constante alfanumerica";
@@ -39,6 +72,19 @@ const std::string ERROR35 = "se esperaba =";
 const std::string ERROR36 = "se esperaba declaracion de variables funcion o precidimiento";
 const std::string ERROR37 = "solo las funciones tienen return";
 const std::string ERROR38 = "falta return";
+const std::string ERROR39 = "No existe funcion o procedimiento";
+const std::string ERROR40 = "No ecorresponden numero de parametros";
+const std::string ERROR41 = "Los parametros no corresponden";
+const std::string ERROR42 = "No existe ID";
+const std::string ERROR43 = "ID sin dimension";
+const std::string ERROR44 = "Error la expresion esperaba un int";
+const std::string ERROR45 = "El tipo no es igual a la asigancion";
+const std::string ERROR46 = "tipo Return distinto a tipo funcion";
+const std::string ERROR47 = "se esperaba un bool de la funcion";
+const std::string ERROR48 = "se esperaba un int";
+const std::string ERROR49 = "se esperaba un int o flotante";
+const std::string ERROR50 = "se esperaba un bool";
+
 
 
 
@@ -57,6 +103,7 @@ public:
 	void Nextline();
 	void Initialize();
 	std::string GetErrors();
+	LEXIC_STATES::E SetType(std::string type);
 	CErrorHandler();
 	~CErrorHandler();
 };

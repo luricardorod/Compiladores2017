@@ -1,3 +1,58 @@
-﻿  CSemTerm.cpp
-  Compiladores.vcxproj -> C:\Users\blueMonkey\Documents\Compiladores2017\x64\Debug\Compiladores.exe
-  Compiladores.vcxproj -> C:\Users\blueMonkey\Documents\Compiladores2017\x64\Debug\Compiladores.pdb (Full PDB)
+﻿  CErrorHandler.cpp
+  CLAritmeticOperators.cpp
+  CLAssign.cpp
+  CLCloseDimensionOperator.cpp
+  CLComments.cpp
+  CLConstantAlfanumeric.cpp
+  CLDelimiters.cpp
+  CLGroupOperators.cpp
+  CLId.cpp
+  CLLogicOperators.cpp
+  CLNone.cpp
+  CLNumberFloat.cpp
+  CLNumberInt.cpp
+  CLOpenDimensionOperator.cpp
+  CLRelacionalOperators.cpp
+  CLexicalAnalysis.cpp
+  CSAssign.cpp
+  CSBlock.cpp
+  CSCondition.cpp
+  CSExpression.cpp
+  Generating Code...
+  Compiling...
+  CSFor.cpp
+  CSFunction.cpp
+  CSIf.cpp
+  CSMain.cpp
+  CSProcess.cpp
+  CSProgram.cpp
+  CSSwitch.cpp
+  CSTerm.cpp
+  CSVar.cpp
+  CSemAssign.cpp
+  CSemBlock.cpp
+  CSemCondition.cpp
+  CSemExpression.cpp
+  CSemFor.cpp
+  CSemFunction.cpp
+  CSemIf.cpp
+  CSemProgram.cpp
+  CSemSwitch.cpp
+  CSemTerm.cpp
+  CSemVar.cpp
+  Generating Code...
+e:\uad\6to\compiladores2017\compiladores\csemanticstates.h(201): warning C4715: 'CSemanticStates::transformSemToType': not all control paths return a value
+e:\uad\6to\compiladores2017\compiladores\csemanticstates.h(201): warning C4715: 'CSemanticStates::transformSemToType': not all control paths return a value
+e:\uad\6to\compiladores2017\compiladores\csemfunction.cpp(22): warning C4715: 'CSemFunction::Evaluate': not all control paths return a value
+e:\uad\6to\compiladores2017\compiladores\csemanticstates.h(201): warning C4715: 'CSemanticStates::transformSemToType': not all control paths return a value
+e:\uad\6to\compiladores2017\compiladores\csemanticstates.h(201): warning C4715: 'CSemanticStates::transformSemToType': not all control paths return a value
+e:\uad\6to\compiladores2017\compiladores\csemanticstates.h(201): warning C4715: 'CSemanticStates::transformSemToType': not all control paths return a value
+  Compiling...
+  CSemanticAnalysis.cpp
+  CSyntacticAnalysis.cpp
+  CTokenizer.cpp
+  NodesVars.cpp
+  compiladores.cpp
+  Generating Code...
+  Compiladores.vcxproj -> E:\UAD\6to\Compiladores2017\x64\Debug\Compiladores.exe
+  Compiladores.vcxproj -> E:\UAD\6to\Compiladores2017\x64\Debug\Compiladores.pdb (Full PDB)

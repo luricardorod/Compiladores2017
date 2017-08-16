@@ -53,7 +53,7 @@ SYNTACTIC_STATES::E CSVar::Evaluate(Token token, SYNTACTIC_STATES::E oldState, s
 			if (oldState == SYNTACTIC_STATES::SPROGRAM)
 			{
 				GlobalNode tempGlobalNode;
-				tempGlobalNode.m_category = "var";
+				tempGlobalNode.m_category = CATEGORIES_EXPRESSION::VAR;
 				tempGlobalNode.m_name = name;
 				tempGlobalNode.m_dimension = dim;
 				globalNodes.push_back(tempGlobalNode);
@@ -62,7 +62,7 @@ SYNTACTIC_STATES::E CSVar::Evaluate(Token token, SYNTACTIC_STATES::E oldState, s
 			{
 				LocalNode tempLocalNode;
 				tempLocalNode.m_name = name;
-				tempLocalNode.m_category = "var";
+				tempLocalNode.m_category = CATEGORIES_EXPRESSION::VAR;
 				tempLocalNode.m_dimension = dim;
 				tempLocalNode.m_parent = parent;
 				localNodes.push_back(tempLocalNode);
@@ -92,7 +92,7 @@ SYNTACTIC_STATES::E CSVar::Evaluate(Token token, SYNTACTIC_STATES::E oldState, s
 	{
 		for (int i = 0; i < globalNodes.size(); i++)
 		{
-			globalNodes[i].m_type = type;
+			globalNodes[i].m_type = m_errorHandler->SetType(type);
 			m_nodes->addGlobalNode(globalNodes[i], token.line);
 		}
 	}
@@ -100,7 +100,7 @@ SYNTACTIC_STATES::E CSVar::Evaluate(Token token, SYNTACTIC_STATES::E oldState, s
 	{
 		for (int i = 0; i < localNodes.size(); i++)
 		{
-			localNodes[i].m_type = type;
+			localNodes[i].m_type = m_errorHandler->SetType(type);
 			m_nodes->addLocalNode(localNodes[i], token.line);
 		}
 	}

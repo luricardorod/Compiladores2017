@@ -14,7 +14,7 @@ SYNTACTIC_STATES::E CSTerm::Evaluate(Token token, SYNTACTIC_STATES::E oldState, 
 			m_errorHandler->AddError(ERROR25, "sintactico", token.line);
 		}
 	}
-	else if ( token.itype == LEXIC_STATES::lNUMBERINT || token.itype == LEXIC_STATES::lNUMBERFLOAT || token.itype == LEXIC_STATES::lCONSTANTALFANUMERIC)
+	else if (token.svalue == "true" || token.svalue == "false" || token.itype == LEXIC_STATES::lNUMBERINT || token.itype == LEXIC_STATES::lNUMBERFLOAT || token.itype == LEXIC_STATES::lSTRING)
 	{
 		return SYNTACTIC_STATES::E();
 	}
@@ -38,10 +38,14 @@ SYNTACTIC_STATES::E CSTerm::Evaluate(Token token, SYNTACTIC_STATES::E oldState, 
 		else if (token.svalue == "(")
 		{
 			token = NextToken();
+
 			if (token.svalue != ")") {
 				(*m_indexToken)--;
-				(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
-				token = NextToken();
+				do
+				{
+					(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
+					token = NextToken();
+				} while (token.svalue == ",");
 				if (token.svalue != ")")
 				{
 					m_errorHandler->AddError(ERROR10, "sintactico", token.line);
@@ -70,7 +74,7 @@ SYNTACTIC_STATES::E CSTerm::Evaluate(Token token, SYNTACTIC_STATES::E oldState, 
 	{
 		m_errorHandler->AddError(ERROR26, "sintactico", token.line);
 		token = NextToken();
-		if (token.svalue == "(" || (token.itype == LEXIC_STATES::lID) || (token.itype == LEXIC_STATES::lNUMBERINT || token.itype == LEXIC_STATES::lNUMBERFLOAT || token.itype == LEXIC_STATES::lCONSTANTALFANUMERIC) || (token.svalue == "!")) {
+		if (token.svalue == "(" || (token.itype == LEXIC_STATES::lID) || (token.itype == LEXIC_STATES::lNUMBERINT || token.itype == LEXIC_STATES::lNUMBERFLOAT || token.itype == LEXIC_STATES::lSTRING) || (token.svalue == "!")) {
 			(*m_indexToken)--;
 			(*m_States)[SYNTACTIC_STATES::STERM]->Evaluate(token, SYNTACTIC_STATES::STERM);
 		}

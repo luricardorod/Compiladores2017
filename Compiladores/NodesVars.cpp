@@ -27,7 +27,7 @@ void CNodesVars::addGlobalNode(GlobalNode globalNode, int line) {
 	}
 	else
 	{
-		if (node->m_category == "indef")
+		if (node->m_category == CATEGORIES_EXPRESSION::NULLCATEGORY)
 		{
 			(*node).m_category = globalNode.m_category;
 			(*node).m_dimension = globalNode.m_dimension;
@@ -35,7 +35,7 @@ void CNodesVars::addGlobalNode(GlobalNode globalNode, int line) {
 			(*node).m_values = globalNode.m_values;
 			return;
 		}
-		if (node->m_category == "var" && node->m_category == globalNode.m_category)
+		if (node->m_category == CATEGORIES_EXPRESSION::VAR && node->m_category == globalNode.m_category)
 		{
 			m_errorHandler->AddError(ERROR13, "sintactico", line);
 			return;
@@ -73,10 +73,10 @@ void CNodesVars::addLocalNode(LocalNode localNode, int line) {
 	{
 		GlobalNode temp;
 		temp.m_name = localNode.m_name;
-		temp.m_category = "indef";
+		temp.m_category = CATEGORIES_EXPRESSION::NULLCATEGORY;
 		temp.m_dimension = 0;
 		temp.m_nextGlobal = NULL;
-		temp.m_type = "indef";
+		temp.m_type = LEXIC_STATES::lNONE;
 		temp.m_values.clear();
 
 		temp.m_nextLocal = new LocalNode();
@@ -151,10 +151,11 @@ void CNodesVars::errorCategory(std::string category, int line)
 	}
 }
 
-std::string localNodeToText(LocalNode localnode) {
+
+std::string CNodesVars::localNodeToText(LocalNode localnode) {
 	std::string text;
 	
-	text += localnode.m_category + "," + localnode.m_type + "," + localnode.m_parent + "," + std::to_string(localnode.m_dimension) + ",[";
+	text += localnode.m_category + "," + TypeToString(localnode.m_type) + "," + localnode.m_parent + "," + std::to_string(localnode.m_dimension) + ",[";
 	for (int i = 0; i < localnode.m_values.size(); i++)
 	{
 		text += localnode.m_values[i];
@@ -177,7 +178,7 @@ std::string CNodesVars::GetNodes()
 	std::string text = "";
 	for (auto globalNode = Nodes.begin(); globalNode != Nodes.end(); globalNode++)
 	{
-		text += globalNode->m_name + "," + globalNode->m_category + "," + globalNode->m_type + ",";
+		text += globalNode->m_name + "," + CategoriesToString(globalNode->m_category) + "," + TypeToString(globalNode->m_type) + ",";
 		text += std::to_string(globalNode->m_dimension) + ",[";
 		for (int i = 0; i < globalNode->m_values.size(); i++)
 		{
@@ -197,7 +198,102 @@ std::string CNodesVars::GetNodes()
 	return text;
 }
 
-NODE_TYPES::E CNodesVars::GetType(std::string name)
+std::string CNodesVars::GetType(std::string name, std::string environment)
+{
+	std::vector<GlobalNode>::iterator node;
+	for (node = Nodes.begin(); node != Nodes.end(); node++)
+	{
+		if (node->m_name == name)
+		{
+			break;
+		}
+	}
+	
+	return "NULL";
+}
+
+GlobalNode CNodesVars::isFunctionProcedureAndNotVar(std::string name, std::string environment)
+{
+	std::vector<GlobalNode>::iterator node;
+	for (node = Nodes.begin(); node != Nodes.end(); node++)
+	{
+		if (node->m_name == name)
+		{
+			break;
+		}
+	}
+	if (node == Nodes.end())
+	{
+		return GlobalNode();
+	}
+	LocalNode* temp = node->m_nextLocal;
+	while (temp != NULL)
+	{
+		if (temp->m_parent == environment && temp->m_category == CATEGORIES_EXPRESSION::VAR)
+		{
+			return GlobalNode();
+		}
+		temp = temp->m_next;
+	}
+	if ((node->m_category == CATEGORIES_EXPRESSION::PROCEDURE) || (node->m_category == CATEGORIES_EXPRESSION::FUNCTION))
+	{
+		return (*node);
+	}
+	return GlobalNode();
+}
+
+std::string CNodesVars::CategoriesToString(CATEGORIES_EXPRESSION::E category)
+{
+	if (category == CATEGORIES_EXPRESSION::FUNCTION)
+	{
+		return "funtion";
+	}
+	else if (category == CATEGORIES_EXPRESSION::MAIN)
+	{
+		return "main";
+	}
+	else if (category == CATEGORIES_EXPRESSION::NULLCATEGORY)
+	{
+		return "indef";
+	}
+	else if (category == CATEGORIES_EXPRESSION::PROCEDURE)
+	{
+		return "procedure";
+	}
+	else if (category == CATEGORIES_EXPRESSION::VAR)
+	{
+		return "var";
+	}
+	return "";
+}
+
+std::string CNodesVars::TypeToString(LEXIC_STATES::E type)
+{
+	if (type == LEXIC_STATES::lBOOL)
+	{
+		return "bool";
+	}
+	else if (type == LEXIC_STATES::lNUMBERFLOAT)
+	{
+		return "float";
+	}
+	else if (type == LEXIC_STATES::lNUMBERINT)
+	{
+		return "int";
+	}
+	else if (type == LEXIC_STATES::lNONE)
+	{
+		return "null";
+	}
+	else if (type == LEXIC_STATES::lSTRING)
+	{
+		return "string";
+	}
+
+	return std::string();
+}
+
+NODE_TYPES::E CNodesVars::GetCategory(std::string name)
 {
 	std::vector<GlobalNode>::iterator node;
 	NODE_TYPES::E value = NODE_TYPES::NODENULL;
@@ -209,11 +305,11 @@ NODE_TYPES::E CNodesVars::GetType(std::string name)
 	{
 		if (node->m_name == name)
 		{
-			if (node->m_category == "process")
+			if (node->m_category == CATEGORIES_EXPRESSION::PROCEDURE)
 			{
 				return NODE_TYPES::PROCESS;
 			}
-			else if (node->m_category == "function")
+			else if (node->m_category == CATEGORIES_EXPRESSION::FUNCTION)
 			{
 				return NODE_TYPES::FUNCTION;
 			}
@@ -221,6 +317,50 @@ NODE_TYPES::E CNodesVars::GetType(std::string name)
 	}
 
 	return value;
+}
+
+GlobalNode CNodesVars::isGlobalVar(std::string name, std::string environment)
+{
+	std::vector<GlobalNode>::iterator node;
+	for (node = Nodes.begin(); node != Nodes.end(); node++)
+	{
+		if (node->m_name == name)
+		{
+			break;
+		}
+	}
+	if (node == Nodes.end() || node->m_category != CATEGORIES_EXPRESSION::VAR)
+	{
+		return GlobalNode();
+	}
+	return (*node);
+}
+
+LocalNode CNodesVars::isLocalVar(std::string name, std::string environment)
+{
+	std::vector<GlobalNode>::iterator node;
+	for (node = Nodes.begin(); node != Nodes.end(); node++)
+	{
+		if (node->m_name == name)
+		{
+			break;
+		}
+	}
+	if (node == Nodes.end())
+	{
+		return LocalNode();
+	}
+	LocalNode* temp = node->m_nextLocal;
+	while (temp != NULL)
+	{
+		if (temp->m_parent == environment && temp->m_category == CATEGORIES_EXPRESSION::VAR)
+		{
+			return (*temp);
+		}
+		temp = temp->m_next;
+	}
+
+	return LocalNode();
 }
 
 CNodesVars::CNodesVars()

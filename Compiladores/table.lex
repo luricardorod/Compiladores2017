@@ -1,21 +1,33 @@
-var	Keyword
+function	Keyword
 lol	Id
+(	Group Operators
+lu	Id
 :	Delimiter
 int	Keyword
+)	Group Operators
+:	Delimiter
+float	Keyword
+{	Group Operators
+var	Keyword
+tu	Id
+:	Delimiter
+bool	Keyword
 ;	Delimiter
+tu	Id
+=	Assign
+true	Keyword
+;	Delimiter
+return	Keyword
+tu	Id
+;	Delimiter
+}	Group Operators
 main	Keyword
 (	Group Operators
 )	Group Operators
 {	Group Operators
-a	Id
-=	Assign
-asd	Id
-[	Open Dimension Operator
-3	Int
-+	AritmeticOperator
-4	Int
-*	AritmeticOperator
 lol	Id
-]	Close Dimension Operator
+(	Group Operators
+10	Int
+)	Group Operators
 ;	Delimiter
 }	Group Operators

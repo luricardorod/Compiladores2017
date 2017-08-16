@@ -46,7 +46,7 @@ LEXIC_STATES::E CLNone::Evaluate(char character)
 	}
 	else if (character == '"')
 	{
-		return LEXIC_STATES::lCONSTANTALFANUMERIC;
+		return LEXIC_STATES::lSTRING;
 	}
 	else if (character == '=')
 	{

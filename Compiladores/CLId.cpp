@@ -19,7 +19,11 @@ LEXIC_STATES::E CLId::Enter(char character, std::string string)
 
 std::string CLId::Exit()
 {
-	if (
+	if (m_string == "true" || m_string == "false")
+	{
+		m_tokenaizer->AddToken(m_string, "Keyword", LEXIC_STATES::lBOOL);
+	}
+	else if (
 		m_string == "var" ||
 		m_string == "int" ||
 		m_string == "float" ||

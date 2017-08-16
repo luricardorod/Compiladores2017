@@ -28,6 +28,7 @@ void CLexicalAnalysis::Compile(std::string * file, CTokenizer* tokenaizer, CErro
 
 	for (int i = 0; i < file->length(); i++)
 	{
+		printf("%d", m_iActiveState);
 		LEXIC_STATES::E previousState = m_iActiveState;
 		m_iActiveState = m_States[m_iActiveState]->Evaluate((*file)[i]);
 		if (previousState != m_iActiveState)
@@ -45,7 +46,7 @@ void CLexicalAnalysis::Compile(std::string * file, CTokenizer* tokenaizer, CErro
 	{
 		m_errorHandler->AddError(ERROR2, "lexico");
 	}
-	if (m_iActiveState == LEXIC_STATES::lCONSTANTALFANUMERIC)
+	if (m_iActiveState == LEXIC_STATES::lSTRING)
 	{
 		m_errorHandler->AddError(ERROR3, "lexico");
 	}
@@ -55,7 +56,7 @@ CLexicalAnalysis::CLexicalAnalysis()
 {
 	m_iActiveState = LEXIC_STATES::lNONE;
 	//decalracion deestados
-	m_States.resize(LEXIC_STATES::lSTATES_MAX-1);
+	m_States.resize(LEXIC_STATES::lSTATES_MAX-2);
 	m_States[LEXIC_STATES::lNONE] = new CLNone;
 	m_States[LEXIC_STATES::lID] = new CLId;
 	m_States[LEXIC_STATES::lNUMBERINT] = new CLNumberInt;
@@ -65,7 +66,7 @@ CLexicalAnalysis::CLexicalAnalysis()
 	m_States[LEXIC_STATES::lARITMETICOPERATORS] = new CLAritmeticOperators;
 	m_States[LEXIC_STATES::lRELACIONALOPERATORS] = new CLRelacionalOperators;
 	m_States[LEXIC_STATES::lASSIGN] = new CLAssign;
-	m_States[LEXIC_STATES::lCONSTANTALFANUMERIC] = new CLConstantAlfanumeric;
+	m_States[LEXIC_STATES::lSTRING] = new CLConstantAlfanumeric;
 	m_States[LEXIC_STATES::lDELIMITERS] = new CLDelimiters;
 	m_States[LEXIC_STATES::lGROUPOPERATORS] = new CLGroupOperators;
 	m_States[LEXIC_STATES::lOPENDIMENSIONOPERATOR] = new CLOpenDimensionOperator;

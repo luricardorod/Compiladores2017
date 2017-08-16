@@ -4,14 +4,22 @@
 #include <string>
 #include "NodesVars.h"
 
+
+struct nodeExpresion {
+	nodeExpresion* m_father = NULL;
+	nodeExpresion* m_hijoDerecha = NULL;
+	nodeExpresion* m_hijoIzquierda = NULL;
+	Token m_token;
+	LEXIC_STATES::E m_type= LEXIC_STATES::lNONE;
+};
 namespace SEMANTIC_STATES
 {
 	enum E
 		{
-			SPROGRAM,
-			SVAR,
-			SPROCESS,
-			SFUNCTION,
+			SPROGRAM, //string
+			SVAR,		//float
+			SPROCESS,	//int
+			SFUNCTION,	//bool
 			SBLOCK,
 			SEXPRESSION,
 			STERM,
@@ -118,7 +126,7 @@ public:
 		{
 			LocalNode tempLocalNode;
 			tempLocalNode.m_name = token.svalue;
-			tempLocalNode.m_category = "var";
+			tempLocalNode.m_category = CATEGORIES_EXPRESSION::VAR;
 			tempLocalNode.m_parent = parent;
 			tempLocalNode.m_dimension = 1;
 			token = NextToken();
@@ -139,7 +147,7 @@ public:
 
 				for (auto i = localnodes.begin(); i != localnodes.end(); i++)
 				{
-					i->m_type = type;
+					i->m_type = m_errorHandler->SetType(type);
 					m_nodes->addLocalNode(*i, token.line);
 				}
 				localnodes.clear();
@@ -167,5 +175,28 @@ public:
 	}
 	bool isOperator(Token token) {
 		return token.itype == LEXIC_STATES::lARITMETICOPERATORS || token.itype == LEXIC_STATES::lLOGICOPERATORS || token.itype == LEXIC_STATES::lRELACIONALOPERATORS;
+	}
+
+	LEXIC_STATES::E transformSemToType(SEMANTIC_STATES::E semState) {
+		//SPROGRAM, //string
+		//	SVAR,		//float
+		//	SPROCESS,	//int
+		//	SFUNCTION, //bool
+		if (semState == SEMANTIC_STATES::SPROGRAM)
+		{
+			return LEXIC_STATES::lSTRING;
+		}
+		if (semState == SEMANTIC_STATES::SVAR)
+		{
+			return LEXIC_STATES::lNUMBERFLOAT;
+		}
+		if (semState == SEMANTIC_STATES::SPROCESS)
+		{
+			return LEXIC_STATES::lNUMBERINT;
+		}
+		if (semState == SEMANTIC_STATES::SFUNCTION)
+		{
+			return LEXIC_STATES::lBOOL;
+		}
 	}
 };

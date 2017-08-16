@@ -114,7 +114,7 @@ public:
 		{
 			LocalNode tempLocalNode;
 			tempLocalNode.m_name = token.svalue;
-			tempLocalNode.m_category = "var";
+			tempLocalNode.m_category = CATEGORIES_EXPRESSION::VAR;
 			tempLocalNode.m_parent = parent;
 			tempLocalNode.m_dimension = 1;
 			token = NextToken();
@@ -135,7 +135,7 @@ public:
 
 				for (auto i = localnodes.begin(); i != localnodes.end(); i++)
 				{
-					i->m_type = type;
+					i->m_type = m_errorHandler->SetType(type);
 					m_nodes->addLocalNode(*i, token.line);
 					(*typesParams).push_back(type);
 				}

@@ -12,7 +12,6 @@ SEMANTIC_STATES::E CSemIf::Evaluate(Token token, SEMANTIC_STATES::E oldState, st
 	token = NextToken();
 	if (token.svalue != "(")
 	{
-		m_errorHandler->AddError(ERROR19, "sintactico", token.line);
 		token = NextToken();
 
 		if (token.svalue != "(")
@@ -20,11 +19,14 @@ SEMANTIC_STATES::E CSemIf::Evaluate(Token token, SEMANTIC_STATES::E oldState, st
 			(*m_indexToken) -= 2;
 		}
 	}
-	(*m_States)[SEMANTIC_STATES::SEXPRESSION]->Evaluate(token, SEMANTIC_STATES::SBLOCK, "");
+	LEXIC_STATES::E temp = transformSemToType((*m_States)[SEMANTIC_STATES::SEXPRESSION]->Evaluate(token, SEMANTIC_STATES::SEXPRESSION));
+	if (temp != LEXIC_STATES::lBOOL)
+	{
+		m_errorHandler->AddError(ERROR47, "semantico", token.line);
+	}
 	token = NextToken();
 	if (token.svalue != ")")
 	{
-		m_errorHandler->AddError(ERROR25, "sintactico", token.line);
 		token = NextToken();
 
 		if (token.svalue != ")")

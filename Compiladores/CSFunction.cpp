@@ -5,8 +5,8 @@
 SYNTACTIC_STATES::E CSFunction::Evaluate(Token token, SYNTACTIC_STATES::E oldState, std::string parent)
 {
 	GlobalNode tempGlobal;
-	tempGlobal.m_category = "function";
-	tempGlobal.m_type = "NULL";
+	tempGlobal.m_category = CATEGORIES_EXPRESSION::FUNCTION;
+	tempGlobal.m_type = LEXIC_STATES::lNONE;
 	tempGlobal.m_dimension = 0;
 	if (token.itype != LEXIC_STATES::lID)
 	{
@@ -58,7 +58,7 @@ SYNTACTIC_STATES::E CSFunction::Evaluate(Token token, SYNTACTIC_STATES::E oldSta
 			return SYNTACTIC_STATES::SPROGRAM;
 		}
 		std::string type = ProcessType(token.line);
-		tempGlobal.m_type = type;
+		tempGlobal.m_type = m_errorHandler->SetType(type);
 		if (type == "error")
 		{
 			while (token.svalue != "}" && token.svalue != "NULL")

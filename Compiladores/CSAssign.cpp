@@ -10,56 +10,64 @@ SYNTACTIC_STATES::E CSAssign::Evaluate(Token token, SYNTACTIC_STATES::E oldState
 		m_errorHandler->AddError(ERROR33, "sintactico", token.line);
 	}
 	token = NextToken();
-	if (token.svalue == "[")
-	{
-		(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
-		token = NextToken();
-		if (token.svalue != "]")
-		{
-			m_errorHandler->AddError(ERROR12, "Sintactico", token.line);
-			while (token.svalue != ")" && token.svalue != "NULL")
-			{
-				token = NextToken();
-			}
-		}
-		token = NextToken();
-	}
-	if (token.svalue == "=")
-	{
-		(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
-		token = NextToken();
-
-		if (token.svalue != ";")
-		{
-			m_errorHandler->AddError(ERROR10, "sintactico", token.line);
-		}
-	}
-	else if (token.svalue == "(" && oldState == SYNTACTIC_STATES::SBLOCK)
+	if (token.svalue == "(" && oldState == SYNTACTIC_STATES::SBLOCK)
 	{
 		token = NextToken();
 		if (token.svalue != ")") {
 			(*m_indexToken)--;
-			(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
-			token = NextToken();
+			do
+			{
+				(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
+				token = NextToken();
+			} while (token.svalue == ",");
 			if (token.svalue != ")")
 			{
 				m_errorHandler->AddError(ERROR10, "sintactico", token.line);
-				token = NextToken();
-				if (token.svalue != ";")
+				(*m_indexToken)--;
+			}
+			token = NextToken();
+			if (token.svalue != ";")
+			{
+				m_errorHandler->AddError(ERROR10, "sintactico", token.line);
+				while (token.svalue != ";" && token.svalue != "}" && token.svalue != "NULL")
 				{
-					m_errorHandler->AddError(ERROR10, "sintactico", token.line);
-					while (token.svalue != ";" && token.svalue != "}" && token.svalue != "NULL")
-					{
-						token = NextToken();
-					}
+					token = NextToken();
 				}
+				(*m_indexToken)--;
 			}
 		}
-		
-	}
+
+	} 
 	else
 	{
-		m_errorHandler->AddError(ERROR35, "sintactico", token.line);
+		if (token.svalue == "[")
+		{
+			(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
+			token = NextToken();
+			if (token.svalue != "]")
+			{
+				m_errorHandler->AddError(ERROR12, "Sintactico", token.line);
+				while (token.svalue != ")" && token.svalue != "NULL")
+				{
+					token = NextToken();
+				}
+			}
+			token = NextToken();
+		}
+		if (token.svalue == "=")
+		{
+			(*m_States)[SYNTACTIC_STATES::SEXPRESSION]->Evaluate(token, SYNTACTIC_STATES::SBLOCK);
+			token = NextToken();
+
+			if (token.svalue != ";")
+			{
+				m_errorHandler->AddError(ERROR10, "sintactico", token.line);
+			}
+		}
+		else
+		{
+			m_errorHandler->AddError(ERROR35, "sintactico", token.line);
+		}
 	}
 	return SYNTACTIC_STATES::E();
 }

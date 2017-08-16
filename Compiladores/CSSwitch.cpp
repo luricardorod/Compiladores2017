@@ -37,7 +37,7 @@ SYNTACTIC_STATES::E CSSwitch::Evaluate(Token token, SYNTACTIC_STATES::E oldState
 		(*m_States)[SYNTACTIC_STATES::SBLOCK]->Evaluate(token, oldState, parent);
 		token = NextToken();
 	}
-	if (token.svalue != "default")
+	if (token.svalue == "default")
 	{
 		token = NextToken();
 		if (token.svalue != ":")
