@@ -58,12 +58,15 @@ SEMANTIC_STATES::E CSemBlock::Evaluate(Token token, SEMANTIC_STATES::E oldState,
 			{
 				m_errorHandler->AddError(ERROR37, "semantico", token.line);
 			}
-			LEXIC_STATES::E temp = transformSemToType((*m_States)[SEMANTIC_STATES::SEXPRESSION]->Evaluate(token, SEMANTIC_STATES::SBLOCK));
-
-			if (temp != funProc.m_type)
+			else
 			{
-				m_errorHandler->AddError(ERROR46, "semantico", token.line);
+				LEXIC_STATES::E temp = transformSemToType((*m_States)[SEMANTIC_STATES::SEXPRESSION]->Evaluate(token, SEMANTIC_STATES::SBLOCK));
 
+				if (temp != funProc.m_type)
+				{
+					m_errorHandler->AddError(ERROR46, "semantico", token.line);
+
+				}
 			}
 			token = NextToken();
 			if (token.svalue != ";")
@@ -74,13 +77,15 @@ SEMANTIC_STATES::E CSemBlock::Evaluate(Token token, SEMANTIC_STATES::E oldState,
 		token = NextToken();
 	}
 
-
-	NODE_TYPES::E nodeType = m_nodes->GetCategory(*m_name);
-	if (nodeType == NODE_TYPES::FUNCTION)
+	if (oldState == SEMANTIC_STATES::SFUNCTION)
 	{
-		if (!flagReturn)
+		NODE_TYPES::E nodeType = m_nodes->GetCategory(*m_name);
+		if (nodeType == NODE_TYPES::FUNCTION)
 		{
-			m_errorHandler->AddError(ERROR38, "semantico", token.line);
+			if (!flagReturn)
+			{
+				m_errorHandler->AddError(ERROR38, "semantico", token.line);
+			}
 		}
 	}
 	return SEMANTIC_STATES::E();

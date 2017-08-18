@@ -40,11 +40,14 @@ SYNTACTIC_STATES::E CSProcess::Evaluate(Token token, SYNTACTIC_STATES::E oldStat
 			{
 				m_errorHandler->AddError(ERROR9, "sintactico", token.line);
 			}
-			while (token.svalue != "}" && token.svalue != "NULL")
+			while (token.svalue != ")" && token.svalue != "NULL" && token.svalue != "{")
 			{
 				token = NextToken();
 			}
-			return SYNTACTIC_STATES::E();
+			if (token.svalue == "{")
+			{
+				(*m_indexToken)--;
+			}
 		}
 		
 		tempGlobal.m_type = LEXIC_STATES::lNONE;

@@ -84,6 +84,8 @@ const std::string ERROR47 = "se esperaba un bool de la funcion";
 const std::string ERROR48 = "se esperaba un int";
 const std::string ERROR49 = "se esperaba un int o flotante";
 const std::string ERROR50 = "se esperaba un bool";
+const std::string ERROR51 = "doble default";
+
 
 
 

@@ -160,7 +160,7 @@ SEMANTIC_STATES::E CSemTerm::Evaluate(Token token, SEMANTIC_STATES::E oldState, 
 		{
 			m_errorHandler->AddError(ERROR49, "semantico", token.line);
 		}
-		token.itype = LEXIC_STATES::lBOOL;
+		token.itype = LEXIC_STATES::lNUMBERFLOAT;
 		(*expressionPosfija).push_back(token);
 
 	}
@@ -173,6 +173,7 @@ SEMANTIC_STATES::E CSemTerm::Evaluate(Token token, SEMANTIC_STATES::E oldState, 
 		}
 		else
 		{
+			(*m_indexToken)--;
 			(*m_indexToken)--;
 		}
 

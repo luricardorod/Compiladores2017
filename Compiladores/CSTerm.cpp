@@ -81,6 +81,7 @@ SYNTACTIC_STATES::E CSTerm::Evaluate(Token token, SYNTACTIC_STATES::E oldState, 
 		else
 		{
 			(*m_indexToken)--;
+			(*m_indexToken)--;
 		}
 
 	}

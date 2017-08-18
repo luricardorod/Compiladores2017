@@ -16,7 +16,7 @@ SEMANTIC_STATES::E CSemProcess::Evaluate(Token token, SEMANTIC_STATES::E oldStat
 		token = NextToken();
 	}
 	(*m_indexToken)--;
-	(*m_States)[SEMANTIC_STATES::SBLOCK]->Evaluate(token, SEMANTIC_STATES::SFUNCTION);
+	(*m_States)[SEMANTIC_STATES::SBLOCK]->Evaluate(token, SEMANTIC_STATES::SPROCESS);
 	(*m_name) = "NULL";
 }
 

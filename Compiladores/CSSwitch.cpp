@@ -26,27 +26,40 @@ SYNTACTIC_STATES::E CSSwitch::Evaluate(Token token, SYNTACTIC_STATES::E oldState
 	{
 		m_errorHandler->AddError(ERROR21, "sintactico", token.line);
 	}
+	bool flagDefault = false;
 	token = NextToken();
-	while (token.itype == LEXIC_STATES::lNUMBERINT)
+	while (token.svalue != "}")
 	{
-		token = NextToken();
-		if (token.svalue != ":")
+		if (token.itype == LEXIC_STATES::lNUMBERINT || token.svalue == "default")
 		{
-			m_errorHandler->AddError(ERROR21, "sintactico", token.line);
+			if (token.svalue == "default")
+			{
+				if (flagDefault)
+				{
+					m_errorHandler->AddError(ERROR51, "sintactico", token.line);
+				}
+				flagDefault = true;
+			}
+			token = NextToken();
+			if (token.svalue != ":")
+			{
+				m_errorHandler->AddError(ERROR21, "sintactico", token.line);
+			}
+			(*m_States)[SYNTACTIC_STATES::SBLOCK]->Evaluate(token, oldState, parent);
+			token = NextToken();
 		}
-		(*m_States)[SYNTACTIC_STATES::SBLOCK]->Evaluate(token, oldState, parent);
-		token = NextToken();
-	}
-	if (token.svalue == "default")
-	{
-		token = NextToken();
-		if (token.svalue != ":")
+		else
 		{
-			m_errorHandler->AddError(ERROR21, "sintactico", token.line);
+			token = NextToken();
+			if (token.svalue == ":")
+			{
+				m_errorHandler->AddError(ERROR48, "sintactico", token.line);
+				(*m_States)[SYNTACTIC_STATES::SBLOCK]->Evaluate(token, oldState, parent);
+				token = NextToken();
+			}
 		}
-		(*m_States)[SYNTACTIC_STATES::SBLOCK]->Evaluate(token, oldState, parent);
-		token = NextToken();
 	}
+	
 	if (token.svalue != "}")
 	{
 		m_errorHandler->AddError(ERROR27, "sintactico", token.line);

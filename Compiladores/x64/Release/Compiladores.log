@@ -53,7 +53,10 @@ e:\uad\6to\compiladores2017\compiladores\csemanticstates.h(201): warning C4715: 
   CSemanticAnalysis.cpp
   CSyntacticAnalysis.cpp
   CTokenizer.cpp
+  moc_compiladores.cpp
   NodesVars.cpp
   compiladores.cpp
+  main.cpp
   Generating Code...
+  qrc_compiladores.cpp
   Compiladores.vcxproj -> E:\UAD\6to\Compiladores2017\x64\Release\Compiladores.exe

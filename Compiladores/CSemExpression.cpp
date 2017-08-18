@@ -41,7 +41,8 @@ SEMANTIC_STATES::E CSemExpression::Evaluate(Token token, SEMANTIC_STATES::E oldS
 		}
 		Evaluate(apuntador);
 	}
-	if (root.m_type == LEXIC_STATES::lSTATES_MAX)
+
+	if (root.m_type == LEXIC_STATES::lSTRING)
 	{
 		return SEMANTIC_STATES::SPROGRAM;
 	}
@@ -226,23 +227,16 @@ void CSemExpression::Evaluate(nodeExpresion * op)
 	}
 	if (op->m_token.itype == LEXIC_STATES::lARITMETICOPERATORS)
 	{
-		if (!(op->m_hijoDerecha->m_type == LEXIC_STATES::lNUMBERINT || op->m_hijoDerecha->m_type == LEXIC_STATES::lNUMBERFLOAT)
-			&&
-			!(op->m_hijoIzquierda->m_type == LEXIC_STATES::lNUMBERINT || op->m_hijoIzquierda->m_type == LEXIC_STATES::lNUMBERFLOAT)
+		if (!((op->m_hijoDerecha->m_type == LEXIC_STATES::lNUMBERINT && op->m_hijoIzquierda->m_type == LEXIC_STATES::lNUMBERINT)
+			||
+			(op->m_hijoDerecha->m_type == LEXIC_STATES::lNUMBERFLOAT || op->m_hijoIzquierda->m_type == LEXIC_STATES::lNUMBERFLOAT))
 		)
 		{
 			std::string message;
 			message = "Error en expresion se esperaban enteros o flotantes " + op->m_hijoIzquierda->m_token.svalue + " " + op->m_token.svalue + " " + op->m_hijoDerecha->m_token.svalue;
 			m_errorHandler->AddError(message, "semantico", op->m_token.line);
 		}
-		if (op->m_hijoDerecha->m_type == LEXIC_STATES::lNUMBERINT && op->m_hijoIzquierda->m_type == LEXIC_STATES::lNUMBERINT)
-		{
-			op->m_type = LEXIC_STATES::lNUMBERINT;
-		}
-		else
-		{
-			op->m_type = LEXIC_STATES::lNUMBERFLOAT;
-		}
+		op->m_type = op->m_hijoDerecha->m_type;
 	}
 	else if (op->m_token.itype == LEXIC_STATES::lLOGICOPERATORS)
 	{
@@ -269,23 +263,16 @@ void CSemExpression::Evaluate(nodeExpresion * op)
 	}
 	else
 	{
-		if (!(op->m_hijoDerecha->m_type == LEXIC_STATES::lNUMBERINT || op->m_hijoDerecha->m_type == LEXIC_STATES::lNUMBERFLOAT)
-			&&
-			!(op->m_hijoIzquierda->m_type == LEXIC_STATES::lNUMBERINT || op->m_hijoIzquierda->m_type == LEXIC_STATES::lNUMBERFLOAT)
+		if (!((op->m_hijoDerecha->m_type == LEXIC_STATES::lNUMBERINT && op->m_hijoIzquierda->m_type == LEXIC_STATES::lNUMBERINT)
+			||
+			(op->m_hijoDerecha->m_type == LEXIC_STATES::lNUMBERFLOAT || op->m_hijoIzquierda->m_type == LEXIC_STATES::lNUMBERFLOAT))
 			)
 		{
 			std::string message;
 			message = "Error en expresion se esperaban enteros o flotantes " + op->m_hijoIzquierda->m_token.svalue + " " + op->m_token.svalue + " " + op->m_hijoDerecha->m_token.svalue;
 			m_errorHandler->AddError(message, "semantico", op->m_token.line);
 		}
-		if (op->m_hijoDerecha->m_type == LEXIC_STATES::lNUMBERINT && op->m_hijoIzquierda->m_type == LEXIC_STATES::lNUMBERINT)
-		{
-			op->m_type = LEXIC_STATES::lNUMBERINT;
-		}
-		else
-		{
-			op->m_type = LEXIC_STATES::lNUMBERFLOAT;
-		}
+		op->m_type = LEXIC_STATES::lBOOL;
 	}
 }
 
