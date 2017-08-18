@@ -177,8 +177,7 @@ void CSemExpression::addLeft(nodeExpresion * father, std::vector<Token>* express
 		addRigth(father->m_hijoIzquierda, expressionPosfija);
 		addLeft(father->m_hijoIzquierda, expressionPosfija);
 	}
-	else
-	{
+
 		if (father->m_hijoIzquierda->m_token.itype == LEXIC_STATES::lNUMBERFLOAT)
 		{
 			father->m_hijoIzquierda->m_type = LEXIC_STATES::lNUMBERFLOAT;
@@ -196,7 +195,7 @@ void CSemExpression::addLeft(nodeExpresion * father, std::vector<Token>* express
 			father->m_hijoIzquierda->m_type = LEXIC_STATES::lSTRING;
 		}
 		Evaluate(father);
-	}
+	
 }
 
 void CSemExpression::Evaluate(nodeExpresion * op)
@@ -229,7 +228,7 @@ void CSemExpression::Evaluate(nodeExpresion * op)
 	{
 		if (!((op->m_hijoDerecha->m_type == LEXIC_STATES::lNUMBERINT && op->m_hijoIzquierda->m_type == LEXIC_STATES::lNUMBERINT)
 			||
-			(op->m_hijoDerecha->m_type == LEXIC_STATES::lNUMBERFLOAT || op->m_hijoIzquierda->m_type == LEXIC_STATES::lNUMBERFLOAT))
+			(op->m_hijoDerecha->m_type == LEXIC_STATES::lNUMBERFLOAT && op->m_hijoIzquierda->m_type == LEXIC_STATES::lNUMBERFLOAT))
 		)
 		{
 			std::string message;
@@ -265,7 +264,7 @@ void CSemExpression::Evaluate(nodeExpresion * op)
 	{
 		if (!((op->m_hijoDerecha->m_type == LEXIC_STATES::lNUMBERINT && op->m_hijoIzquierda->m_type == LEXIC_STATES::lNUMBERINT)
 			||
-			(op->m_hijoDerecha->m_type == LEXIC_STATES::lNUMBERFLOAT || op->m_hijoIzquierda->m_type == LEXIC_STATES::lNUMBERFLOAT))
+			(op->m_hijoDerecha->m_type == LEXIC_STATES::lNUMBERFLOAT && op->m_hijoIzquierda->m_type == LEXIC_STATES::lNUMBERFLOAT))
 			)
 		{
 			std::string message;
